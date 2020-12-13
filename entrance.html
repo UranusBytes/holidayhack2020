@@ -1,0 +1,136 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Entrance: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+
+    <script>
+        function OpenImgModal(sourceObj) {
+            img_url = sourceObj.getAttribute('src');
+
+            document.getElementById('ModalImg').setAttribute('src', img_url);
+            img_caption = sourceObj.getAttribute('alt');
+            if (img_caption.trim().length > 0) {
+                document.getElementById('ModalCaption').innerText = img_caption
+                document.getElementById('ModalCaption').style.display = 'block';
+            } else {
+                document.getElementById('ModalCaption').style.display = 'none';
+            }
+            document.getElementById('ImgModalDiv').style.display = 'block';
+        }
+
+        function CloseImgModal() {
+            document.getElementById('ImgModalDiv').style.display = 'none';
+        }
+
+        function OpenCharModal(char_name) {
+            document.getElementById('CharModalDiv').style.display = 'block';
+            char_info = chars[char_name];
+
+            document.getElementById('CharAvatar').setAttribute('src', './chars/' + char_name + '.png');
+            document.getElementById('CharName').innerText = char_info['name'];
+
+            document.getElementById('CharDialog').innerHTML = '';
+            for (i =0; i < char_info['dialog'].length; i++ ) {
+                document.getElementById('CharDialog').innerHTML = document.getElementById('CharDialog').innerHTML + '<p>' + char_info['dialog'][i] + '</p>';
+            }
+
+
+        }
+
+        function CloseCharModal() {
+            document.getElementById('CharModalDiv').style.display = 'none';
+        }
+
+    </script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div class="content-body">
+            <div class="content">
+                <div class="title">Entrance: SHHC20</div>
+                <div class="subtitle">An Invitation</div>
+                <div class="writeup">
+                    <p>I had been eagerly awaiting the launch of the SANS Holiday Hack 2020 Challenge. As I was in search of motivation to do productive things, I decided to go check the website. It was live!</p>
+                    <p>As I was watching Ed's welcome video on YouTube, the email notification came out. So I opened my password vault to dig out my creds, and I headed over the the website.</p>
+                </div>
+                <div class="subtitle">A Friendly Face</div>
+                <div class="writeup">
+                    <p>Upon exiting the Jersey Turnpike at 7A (Shore Points), I found myself at a Gondola.</p>
+
+                    <div class="polaroid-rotate" onclick="OpenImgModal('entrance.jpg')">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame">
+                                <div class="polaroid-caption">Entrace to Gondola</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div class="polaroid-img">&nbsp;</div></div>
+
+                            <!--<img class="polaroid-img" src="./screenshots/entrance.jpg" width="25%" onclick="OpenImgModal(this);" alt="Entrance to gondola">-->
+                        </div>
+                    </div>
+
+
+
+                    <p>One of Santa's fairy folk, <span class="char" onclick="OpenCharModal('jingleringford')">Jingle Ringford</span>, was there helping usher new arrivals into the gondola for a ride up to Exit 19: Santa's Castle. But I
+                        also noticed a
+                        billboard nearby. Upon further conversation with Jingle, I knew there was more information that could be garnered from this billboard, so I looked closer.</p>
+
+                </div>
+                <div class="subtitle">A Strange Billboard</div>
+                <div class="writeup">
+                    <p>Clicking on the billboard brings forth a fullsize image of the billboard. Other than the amazing enimga machine on display in the image, the item of note is that the wishlist on the desk has been swirled.</p>
+                    <img class="evidence-left" src="./evidence/billboard.png" width="25%" onclick="OpenImgModal(this);" alt="Billboard at Entrance">
+                    <p>From here, I fired up GIMP and started Googling to figure out which filter I could use to unswirl the section of the image. After a couple of trys at selected and using the Whirl and Pinch distoration, I was able to
+                        see the following gift list:</p>
+                </div>
+                <div class="writeup">
+                    <img class="evidence-right" src="./evidence/billboard_unswirled.jpg" width="25%" onclick="OpenImgModal(this);" alt="Unswirled Billboard">
+                    <div class="indent">
+                        <ul>
+                            <li>ed - Two Front Teeth</li>
+                            <li>Ian - OU Jersey</li>
+                            <li>Jeremy - Blanket</li>
+                            <li>Brian - Lei</li>
+                            <li>Josh Wright - proxmark</li>
+                            <li>Clay - Darth Vader Suit</li>
+                            <li>Tad - Holiday Lights</li>
+                            <li>Phil - Stuffed Pikachu</li>
+                            <li>Jerry - Trip to North Pole</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="writeup">
+                    <p>There are some interesting items on that wish list! I will remember these, as I have a feeling they will come in handy at a later time...</p>
+                </div>
+                <div class="subtitle">A Strange Billboard</div>
+
+                <!-- End -->
+                <div class="footer">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ImgModalDiv" class="modal">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <img class="modal-img" id="ModalImg">
+    <div id="ModalCaption" class="modal-caption"></div>
+</div>
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child">
+            <div id="CharName" class="char-name"></div>
+            <img id="CharAvatar" class="char-avatar" width="50%">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
