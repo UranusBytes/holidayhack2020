@@ -22,6 +22,21 @@
         function CloseImgModal() {
             document.getElementById('ImgModalDiv').style.display = 'none';
         }
+        function OpenImgModal2(image_name) {
+            document.getElementById('ModalImg2').setAttribute('src', image_name);
+            img_caption = sourceObj.getAttribute('alt');
+            if (img_caption.trim().length > 0) {
+                document.getElementById('ModalCaption').innerText = img_caption
+                document.getElementById('ModalCaption').style.display = 'block';
+            } else {
+                document.getElementById('ModalCaption').style.display = 'none';
+            }
+            document.getElementById('ImgModalDiv').style.display = 'block';
+        }
+
+        function CloseImgModal2() {
+            document.getElementById('ImgModalDiv').style.display = 'none';
+        }
 
         function OpenCharModal(char_name) {
             document.getElementById('CharModalDiv').style.display = 'block';
@@ -59,7 +74,7 @@
                 <div class="writeup">
                     <p>Upon exiting the Jersey Turnpike at 7A (Shore Points), I found myself at a Gondola.</p>
 
-                    <div class="polaroid-rotate" onclick="OpenImgModal('entrance.jpg')">
+                    <div class="polaroid-rotate" onclick="OpenImgModal2('entrance.jpg')">
                         <div class="polaroid-surround">
                             <div class="polaroid-frame">
                                 <div class="polaroid-caption">Entrace to Gondola</div>
@@ -113,10 +128,59 @@
         </div>
     </div>
 </div>
+<!--
 <div id="ImgModalDiv" class="modal">
     <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
     <img class="modal-img" id="ModalImg">
     <div id="ModalCaption" class="modal-caption"></div>
+</div>
+-->
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <!--<div class="blank-slate">-->
+    <div class="polaroid-big-rotate" onclick="OpenImgModal2('entrance.jpg')">
+        <div class="polaroid-big-surround">
+            <img src="./images/polaroid-3.png" class="polaroid-big-frame">
+            <img src="./screenshots/entrance.jpg" class="polaroid-big-img">
+            <div class="polaroid-big-caption">Entrace to Gondola</div>
+
+            <!--
+            <div class="polaroid-big-frame inner">
+                &nbsp;
+                &lt;!&ndash;&ndash;&gt;
+            </div>
+-->
+            <!---->
+
+            <!--<img class="polaroid-img" src="./screenshots/entrance.jpg" width="25%" onclick="OpenImgModal(this);" alt="Entrance to gondola">-->
+        </div>
+    </div>
+
+<!--
+        <div class="resizer">
+            foo-bar
+        </div>
+        -->
+            <!--
+            <div class="outer" style="padding-top: 100%;">&nbsp;</div>
+            <div id="resizer_content" class="resizer_content inner">
+                <div id="resizer_content2" class="resizer_content2">Foo-2-Bar</div>
+            </div>
+            -->
+            <!--<div id="buddy_face" class="buddy__face" style="background-position: 100% 0px;">Bar</div>-->
+    <!--</div>-->
+
+<!--    <div class="outer">
+        <div class="inner" id="ModalImg">
+            <div style="background-color: blue; width: 200px; height: 200px;">&nbsp;</div>
+        </div>-->
+        <!--<div class="modal-polaroid">&nbsp;</div>
+        <div class="modal-polaroid-bg"><div class="modal-polaroid-img">&nbsp;</div></div>-->
+    <!--</div>-->
+
+
+<!--    <img class="modal-img" id="ModalImg">
+    <div id="ModalCaption" class="modal-caption"></div>-->
 </div>
 <div id="CharModalDiv" class="modal">
     <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>

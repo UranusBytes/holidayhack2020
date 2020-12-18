@@ -198,7 +198,7 @@ img {
 
 .polaroid-rotate {
     width: 320px;
-    height: 350px;
+    height: 370px;
     transform:rotate(-10deg);
     float: left;
     cursor: zoom-in;
@@ -300,6 +300,185 @@ Modal
     background-color: rgb(0, 0, 0); /* Fallback color */
     background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
 }
+.modal2 {
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+}
+
+
+
+.polaroid-big-rotate {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: translate(-70%, -15%);  /*rotate(0deg) */
+    top: 20%;
+    left: 100%;
+}
+.polaroid-big-surround {
+    /*padding: 30px;*/
+    position: relative;
+    /* left:30px;*/
+    height: 80vh;
+}
+.polaroid-big-frame {
+    position: relative;
+    /*display: block;*/
+/*    background-image: url("../images/polaroid-big.png");
+    background-repeat: no-repeat;
+    background-size: cover;*/
+    height: 100%;
+    width: auto;
+    z-index: 5;
+}
+
+.polaroid-big-img-bg {
+    position: relative;
+    z-index: 3;
+    width: auto;
+    height: 100%;
+    top: 0%;
+    left: -5%;
+    transform: translateX(-40%)
+    /*background-color: gray;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url("../images/static.png");
+    background-size: cover;*/
+}
+.polaroid-big-img {
+    position: relative;
+    z-index: 4;
+    width: 230px;
+    height: 235px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url("../screenshots/entrance.jpg");
+    background-size: contain;
+}
+.polaroid-big-caption {
+    position: absolute;
+    top: 83%;
+    left: 30%;
+    width: auto;
+    /*text-align: center;*/
+    font-size: 4.0vh;
+    font-family: 'Crayon_Pastel', Fallback, sans-serif;
+}
+
+
+
+
+
+
+
+
+.modal-polaroid-surround {
+    background-color: blue;
+}
+.modal-img2 {
+    height: 100%;
+    width: auto;
+    max-height: 90vh;
+    max-width: 90vw;
+    object-fit: contain;
+
+}
+.modal-polaroid {
+    background-image: url("../images/polaroid-big2.png");
+    background-color: blue;
+    padding-top: 0px;
+    margin-top: 0px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-repeat:no-repeat;
+    background-position:left top;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+    max-width: 90vh;
+    z-index: 105;
+}
+.modal-polaroid-bg {
+
+    z-index: 103;
+
+}
+.modal-polaroid-img {
+    position: relative;
+    z-index: 1044;
+    width: 230px;
+    height: 235px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-image: url("../screenshots/entrance.jpg");
+    background-size: contain;
+}
+
+.outer {
+
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: (1/1) * 100%;
+  }
+  > .inner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+/*.blank-slate {
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}*/
+.resizer {
+    position: relative;
+    background-image:url("../images/polaroid-big2.png");
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-size: contain;
+    left: 50%;
+    top: 50%;
+    /* width: 80vw;
+    min-width: 220px;*/
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 80vh;
+
+}
+/*.resizer_content {
+    background-color:yellow;
+    position: relative;
+    top:10%;
+}
+
+.resizer_content2 {
+    width: 600px;
+    height: 800px;
+    background-color:purple;
+    position: relative;
+}*/
+
+
+
+
 
 /* Modal Content (image) */
 .modal-img {
