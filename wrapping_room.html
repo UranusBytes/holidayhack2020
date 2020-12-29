@@ -1,0 +1,111 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Wrapping Room: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+
+                <div class="title">Wrapping Room: SHHC20</div>
+
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('wrapping_room')">
+                                <div class="polaroid-caption">Wrapping Room</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="wrapping_room" class="polaroid-img" style="background-image: url('./screenshots/wrapping_room.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+
+                    <p>The Wrapping Room is on the North side of the castle on the 1.5 floor, accessible from the <a href="./workshop.html" class="link">Workshop</a>.<p>
+                    <p>You can talk with <span class="char" onclick="OpenCharModal('noel_boetie')">Noel Boetie</span>.</p>
+                    <p>The <a href="./tag_generator.html" class="link">Tag Generator</a> is here.</p>
+                </div>
+
+
+                <div class="subtitle">Proxmark3</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_proxmark3')">
+                                <div class="polaroid-caption">Proxmark3</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_proxmark3" class="polaroid-img" style="background-image: url('./screenshots/proxmark3.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>To the right of the table can be found the Proxmark3.</p>
+                </div>
+
+                <div class="subtitle">Rubber Ball</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_rubber_ball')">
+                                <div class="polaroid-caption">Rubber Ball</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_rubber_ball" class="polaroid-img" style="background-image: url('./screenshots/rubber_ball.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>On the right side of the room beside the entry door, can be found a rubber ball.</p>
+                </div>
+
+
+
+
+                <div class="writeup">
+                    <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>
+                </div>
+
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

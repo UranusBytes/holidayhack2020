@@ -1,0 +1,108 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Santa Shop: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+                <div class="title">Objective-3: SHHC20</div>
+                <div class="subtitle">Santa Shop</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_santa_shop')">
+                                <div class="polaroid-caption">Santa Shop</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_santa_shop" class="polaroid-img" style="background-image: url('./evidence/santa_shop.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>In the <a href="./courtyard.html" class="link">Courtyard</a> beside <span class="char" onclick="OpenCharModal('sugarplum_mary')">Sugarplum Mary</span> is a terminal titled Santa Shop.</p>
+                    <p>After completing the <a href="./linux_primer.html" class="link">Linux Primer</a>, if you talk with Sugarplum she will reveal that she has become locked out of her point-of-sale system and needs help getting past the password prompt.</p>
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_santa_shop_1')">
+                                <div class="polaroid-caption">Download Offline Version</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_santa_shop_1" class="polaroid-img" style="background-image: url('./evidence/santa_shop_1.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>Opening up the Santa Shop terminal shows that you can download an offline version.  Doing so produces a Windows executable - santa_shop.exe</p>
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_santa_shop_3')">
+                                <div class="polaroid-caption">Santa Shop Process</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_santa_shop_3" class="polaroid-img" style="background-image: url('./evidence/santa_shop_3.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>Launching the executable on a Windows VM opens a window at the password prompt just like on the terminal.  Looking at the properties of the running process shows me it to be running from C:\Users\Jeremy\AppData\Local\Programs\santa-shop</p>
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_santa_shop_4')">
+                                <div class="polaroid-caption">Santa Shop Process</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_santa_shop_4" class="polaroid-img" style="background-image: url('./evidence/santa_shop_4.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>Going to the directory shows this app to be an electron app - a compiled Node.js app.  I installed node on the VM and then installed asar with the command <span class="command">npm install -g asar</span>.  I then searched for an asar (compiled code) with the command (using a bash shell) <span class="command">find ./ -name *.asar</span></p>
+                    <p>This shows the asar file to be at C:\Users\Jeremy\AppData\Local\Programs\santa-shop\resource\app.asar so I changed to that directory, made a directory for the source, and extracted the source from the asar using the command <span class="command">asar extra app.asar source</span></p>
+                    <p>As a guess, I did a recursive case-insensitive search for the string password with the command <span class="command">grep -ri password</span>.  This showed a constant defined in main.js called SANTA_PASSWORD with a value of:</p>
+                </div>
+                <div class="objective_flag">
+                    <p>santapass</p>
+                </div>
+                <div class="writeup">
+                    <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>
+                </div>
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Entry: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+
+
+                <div class="title">Entry: SHHC20</div>
+
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_entry')">
+                                <div class="polaroid-caption">Entry</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_entry" class="polaroid-img" style="background-image: url('./screenshots/entry.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+
+                    <p>The Entry is at the front of the castle, accessible from the <a href="./entrance.html" class="link">Entrance</a>, <a href="./dining_room.html" class="link">Dining Room</a>, and <a href="./great_room.html" class="link">Great Room</a>.<p>
+                    <p>You can talk with <span class="char" onclick="OpenCharModal('ginger_breddie')">Ginger Breddie</span>, <span class="char" onclick="OpenCharModal('sparkle_redberry')">Sparkle Redberry</span>, <span class="char" onclick="OpenCharModal('piney_sappington')">Piney Sappington</span>, and <span class="char" onclick="OpenCharModal('santa')">Santa</span>.</p>
+                    <p>The challenge for <a href="./santavator.html" class="link">Santavator</a> is here.</p>
+                </div>
+                <div class="subtitle">Hex Nut</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_hex_nut')">
+                                <div class="polaroid-caption">Hex Nut</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_hex_nut" class="polaroid-img" style="background-image: url('./evidence/hex_nut.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>On the right side of the room, beside Ginger Breddie, can be found a hex nut.</p>
+                </div>
+                <div class="subtitle">Santa Portrait</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_santa_portrait')">
+                                <div class="polaroid-caption">Santa Portrait</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_santa_portrait" class="polaroid-img" style="background-image: url('./evidence/santa_portrait.jpg');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>At the top of the room, behind Santa, can be found a portrait of Santa.  This portrait looks very similar to the <a href="uncover_santas_gift_list.html" class="objective">Billboard</a> near the <a href="./entrance.html" class="place">Entrance</a></p>
+                </div>
+
+                <div class="writeup">
+                    <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>
+                </div>
+
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Sort-O-Matic: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+                <div class="title">Sort-O-Matic: SHHC20</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_sort_o_matic')">
+                                <div class="polaroid-caption">Sort-O-Matic</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_sort_o_matic" class="polaroid-img" style="background-image: url('./screenshots/sort_o_matic.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>In the <a href="./workshop.html" class="link">workshop</a> beside <span class="char" onclick="OpenCharModal('minty_candycane')">Minty Candycane</span> is the Sort-O-Matic.</p>
+                    <p>In talking with Minty, he mentions needing help fixing a regex to sort toys.</p>
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_sort_o_matic_1')">
+                                <div class="polaroid-caption">Redis Bug Hunt</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_sort_o_matic_1" class="polaroid-img" style="background-image: url('./screenshots/sort_o_matic_1.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>When you access the Sort-O-Matic, it presents you with eight regex challenges that you need to solve to sort the presents.</p>
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_sort_o_matic_2')">
+                                <div class="polaroid-caption">Sort-O-Matic</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_sort_o_matic_2" class="polaroid-img" style="background-image: url('./screenshots/sort_o_matic_2.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>The answers for each of the regex challenges is as follows:</p>
+                    <div class="indent">
+                        <ol>
+                            <li><span class="command">\d+</span></li>
+                            <li><span class="command">[a-zA-Z]{3}</span></li>
+                            <li><span class="command">[a-z0-9]{2}</span></li>
+                            <li><span class="command">[^A-L1-5]{2}</span></li>
+                            <li><span class="command">^[0-9]{3,}$</span></li>
+                            <li><span class="command">^[0-2]?[0-9]{1}:[0-5]{1}[0-9]{1}:[0-5]{1}[0-9]{1}$</span></li>
+                            <li><span class="command">^([a-fA-F0-9]{2}:){5}[a-fA-F0-9]{2}$</span></li>
+                            <li><span class="command">^[0-3]?[0-9]{1}(\/|.|-)[0-1][0-9]{1}(\/|.|-)[0-9]{4}$</span></li>
+                        </ol>
+                    </div>
+                </div>
+
+
+
+                <div class="writeup">
+                    <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>
+                </div>
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Talks Lobby: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+                <div class="title">Talks Lobby: SHHC20</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('talks_lobby')">
+                                <div class="polaroid-caption">Talks Lobby</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="talks_lobby" class="polaroid-img" style="background-image: url('./screenshots/talks_lobby.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>The talks lobby is in the center of the castle, accessible from the <a href="./santavator.html" class="link">Santavator</a>, <a href="./speaker_unpreparedness_room.html" class="link">Speaker UNpreparedness Room</a>, and <a href="./talk_tracks.html" class="link">Talk Tracks</a>.<p>
+                    <p>You can talk with <span class="char" onclick="OpenCharModal('chimney_scissorsticks')">Chimney Scissorsticks</span>, <span class="char" onclick="OpenCharModal('bow_ninecandle')">Bow Ninecandle</span>, <span class="char" onclick="OpenCharModal('bushy_evergree')">Bushy Evergreen</span>, and <span class="char" onclick="OpenCharModal('jack_frost')">Jack Frost</span>.</p>
+                    <p>The challenge for <a href="./speaker_unprep.html" class="link">Speaker UNprep</a> and <a href="./greeting_cards.html" class="link">Greeting Cards</a> are here.</p>
+                </div>
+                <div class="subtitle">Red Bulb</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('red_bulb')">
+                                <div class="polaroid-caption">Red Bulb</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="red_bulb" class="polaroid-img" style="background-image: url('./screenshots/red_bulb.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>On the right side of the room, near the door to Track 7 talk, can be found the red bulb.</p>
+                </div>
+
+
+                <div class="writeup">
+                    <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>
+                </div>
+
+
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

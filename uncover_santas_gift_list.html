@@ -1,0 +1,127 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Castle Approach: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+                <div class="title">Objective-1: SHHC20</div>
+                <div class="subtitle">Uncover Santa's Gift List</div>
+                <div class="writeup">
+                    <p>There is a photo of Santa's Desk on that billboard with his personal gift list. What gift is Santa planning on getting Josh Wright for the holidays? Talk to Jingle Ringford at the bottom of the mountain for advice.</p>
+                </div>
+
+                <div class="subtitle">A Strange Billboard</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_entrance')">
+                                <div class="polaroid-caption">Billboard Near Entrance</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_entrance" class="polaroid-img" style="background-image: url('./screenshots/entrance.jpg');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>At the <a href="./entrance.html" class="link">Entrance</a> near the gondola is an interesting looking billboard. Clicking on the billboard brings forth a fullsize image of the billboard. Other than the amazing enimga machine on display in the image, the item of note is that the wishlist on the desk has been swirled.</p>
+
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_billboard')">
+                                <div class="polaroid-caption">Billboard at Entrance</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_billboard" class="polaroid-img" style="background-image: url('./evidence/billboard.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+
+                    <p>From here, I fired up GIMP and started Googling to figure out which filter I could use to unswirl the section of the image. After a couple of trys at selected and using the Whirl and Pinch distoration, I was able to
+                        see the following gift list:</p>
+                </div>
+                <div class="writeup">
+
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_billboard_unswirled')">
+                                <div class="polaroid-caption">Unswirled Billboard</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_billboard_unswirled" class="polaroid-img" style="background-image: url('./evidence/billboard_unswirled.jpg');">&nbsp;</div></div>
+                        </div>
+                    </div>
+
+                    <div class="indent">
+                        <ul>
+                            <li>ed - Two Front Teeth</li>
+                            <li>Ian - OU Jersey</li>
+                            <li>Jeremy - Blanket</li>
+                            <li>Brian - Lei</li>
+                            <li>Josh Wright - proxmark</li>
+                            <li>Clay - Darth Vader Suit</li>
+                            <li>Tad - Holiday Lights</li>
+                            <li>Phil - Stuffed Pikachu</li>
+                            <li>Jerry - Trip to North Pole</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="writeup">
+                    <p>There are some interesting items on that wish list! I will remember these, as I have a feeling they will come in handy at a later time...  But for now, I just need to know
+                    what Josh Wright is getting from Santa.</p>
+                </div>
+
+                <div class="objective_flag">
+                    <p>proxmark</p>
+                </div>
+
+
+                <div class="writeup">
+                    <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>
+                </div>
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

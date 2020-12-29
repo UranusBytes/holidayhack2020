@@ -1,0 +1,85 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Objective-2: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div class="content-body">
+            <div class="content">
+                <div class="title">Objective-2: SHHC20</div>
+                <div class="subtitle">Investigate S3 Bucket</div>
+                <div class="writeup">
+                    <p>Beside Shinny Upatree in the Castle Approach is a terminal titled Investigate S3 Bucket</p>
+                </div>
+                <div class="writeup">
+                    <p>                        Once getting to the shell, this shows a called TIPS and a directory called bucket_finder, within which is a README, a script called bucket_finder.rb and a wordlist.  Looking at the TIPS, it states multiple text
+                        editors are available, which implies we need to modify a file.  The README tells how to execute the script.  Looking through the ruby script shows a hint if a wordlist of more than 50 words is used: use the hints in
+                        the description to create the wordlist.  Within the description, the word Wrapper3000 is in red.  Let's try adding that to the wordlist.  That didn't work, but then I remembered that s3 buckets only support lower case
+                        names, so I changed the value to wrapper3000.  Bingo!
+
+                        looking in the directory where the script downloaded all s3 objects, there is a file called package.  Inspecting the file using the file and apropos command shows it to be ASCII.  Looking at the
+                        file contents, it appears to be a single string.  Hmmm...  This looks like base64.  Decoding this in base64 shows a string package.txt.z.xz.xxd.tar.bz2UT.  Using file to determine the magic number
+                        shows this as a zip archive, so let's try unzipping it.  Which then produces a file called package.txt.Z.xz.xxd.tar.bz2.  Using bunzip2 on this file produces package.txt.Z.xz.xxd.tar.  Extracting
+                        this tar produces a file called package.txt.Z.xz.xxd.  Hmmm, this file is ASCII, and it looks like a hex dump.  A quick google shows xxd as a tool to make a hexdump of a file.  The output looks to be binary,
+                        so I redirect to a file called package.txt.Z.xz, which file shows to be an XZ compressed file.  xz --uncompress produces a file called package.txt.Z  file shows this to be compressed'd data 16 bits.
+                        Using uncompress on this finally produces the file package.txt, which contents read "North Pole: The Frostiest Place on Earth".
+
+                        Trying this in the
+
+                    </p>
+                </div>
+                <div class="writeup">
+                    <p></p>
+                </div>
+                <div class="writeup">
+                    <p></p>
+                </div>
+                <div class="writeup">
+                    <p></p>
+                </div>
+
+
+
+                <!--
+                Common
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Castle Approach: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+
+                <div class="title">Unescape Tmux: SHHC20</div>
+                <div class="subtitle">I've Lost My Bird...</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_castle_approach_pepper_minstix')">
+                                <div class="polaroid-caption">Unescape tmux terminal</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_castle_approach_pepper_minstix" class="polaroid-img" style="background-image: url('./screenshots/castle_approach_pepper_minstix.jpg');">&nbsp;</div></div>
+                        </div>
+                    </div>
+
+                    <p>My buddy <span class="char" onclick="OpenCharModal('pepper_minstix')">Pepper Minstix</span> was standing beside a terminal named Unescape Tmux in the <a href="./castle_approach.html">Castle Approach</a>.  He stated he had been working with tmux
+                        lately and asked for assistance in getting him back to where he was admiring a beautiful bird.  'Ol Pepper, that crazy cat...</p>
+
+                </div>
+
+                <div class="subtitle">There Can Be Only One... Session...</div>
+                <div class="writeup">
+
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_unescape_tmux_1')">
+                                <div class="polaroid-caption">Terminal Prompt</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_unescape_tmux_1" class="polaroid-img" style="background-image: url('./evidence/unescape_tmux_1.jpg');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>tmux is a terminal emulator.  Hmmm...  Hints about attaching implies there is a detached session, so I did some Googling (I know there was a cheat sheet, but this is easier for me) and found the command to show all existing sessions.  I executed the command <span class="command">tmux ls</span> and was presented with the info in the pic.  An existing session.  Bingo!</p>
+
+                </div>
+                <div class="subtitle">Polly Wanna Cracker?</div>
+                <div class="writeup">
+
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_unescape_tmux_2')">
+                                <div class="polaroid-caption">Terminal Prompt</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_unescape_tmux_2" class="polaroid-img" style="background-image: url('./evidence/unescape_tmux_2.jpg');">&nbsp;</div></div>
+                        </div>
+                    </div>
+
+                    <p>My Googling had shown the command to re-attach to an existing session, so I ran the command <span class="command">tmux attach -t 0</span> to attach, and voila!  There's the pretty bird Pepper Minstix had been looking at.</p>
+
+
+
+                </div>
+
+                <div class="writeup">
+
+                    <p>More shenanigans were behad in the <a href="./castle_approach.html" class="link">Castle Approach</a>.</p>
+
+                </div>
+
+
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

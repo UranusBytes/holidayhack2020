@@ -1,0 +1,151 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Snowball Fight: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+
+                <div class="title">Snowball Fight: SHHC20</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_snowball_fight')">
+                                <div class="polaroid-caption">Speaker UNPreparedness Room</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_snowball_fight" class="polaroid-img" style="background-image: url('./screenshots/snowball_fight.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+
+                    <p>In the <a href="./speaker_unpreparedness_room.html" class="place">Speaker Unpreparedness Room</a> is <span class="char" onclick="OpenCharModal('tangle_coalbox')">Tangle Coalbox</span> who asks for help in determining how folks are beating the Snowball Fight game in impossible mode.</p>
+
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_snowball_fight_1')">
+                                <div class="polaroid-caption">Snowball Fight</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_snowball_fight_1" class="polaroid-img" style="background-image: url('./screenshots/img_snowball_fight_1.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>Opening the modal shows the game where you can choose your player name on easy and medium, but not on hard or impossible.</p>
+                </div>
+
+                <div class="writeup">
+
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_speaker_unprep_2')">
+                                <div class="polaroid-caption">Same Layout</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_speaker_unprep_2" class="polaroid-img" style="background-image: url('./screenshots/snowball_fight_2.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>In easy and medium mode, if the same username is used, the player's layout is the same.  So the player name is used to seed the layout.</p>
+                </div>
+
+                <div class="subtitle">./lights</div>
+                <div class="writeup">
+
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_speaker_unprep_3')">
+                                <div class="polaroid-caption">./door</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_speaker_unprep_3" class="polaroid-img" style="background-image: url('./screenshots/speaker_unprep_3.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>After solving the ./door challenge, talking to <span class="char" onclick="OpenCharModal('bushy_evergreen')">Bushy Evergreen</span> gives the hint of using an encrypted username.</p>
+                    <p>Going into the labs and swapping the username and password lets the program run and outputs the decrypted password as username and it works using elf-technician as the password!</p>
+                    <p>Computer-TurnLightsOn</p>
+                </div>
+
+                <div class="subtitle">./vending-machine</div>
+                <div class="writeup">
+
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_speaker_unprep_3')">
+                                <div class="polaroid-caption">./door</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_speaker_unprep_3" class="polaroid-img" style="background-image: url('./screenshots/speaker_unprep_3.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>In this challenge, Bushy gives the hint to remove the config file to see what happens.  If the config file is deleted, then the program will prompt for a username and password, and then create a new config file.</p>
+                    <p>Using the same password, but different usernames does not change the encrypted password, so the username is not used as salt.  Changing the password length changes the encrypted password length exactly.  So it's some type of simple subsitution.</p>
+                    <p>Setting the password to AAAAAAAA gives an encrypted string of XiGRehmw and BBBBBBBB of DqTpKv7f</p>
+                    <p>Trying just a single value of A, produces X, AA produces Xi, and AAA produces XiG, so each letter is individually replaced. </p>
+                    <p>Using a password of AAAABBBB gives a value of XIGRKv7f, so each value is individually replaced and not influenced by the value before/after.</p>
+                </div>
+                <div class="writeup">
+
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_speaker_unprep_4')">
+                                <div class="polaroid-caption">./door</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_speaker_unprep_4" class="polaroid-img" style="background-image: url('./screenshots/speaker_unprep_4.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>I was lazy in trying to figure out how the cipher worked, so I wrote a quick python script that would feed passwords into ./vending-machines, pull encrypted string from config json, and then build a lookup table I could use.</p>
+                    <p>The script can be viewed <a href="./lookup.py">here</a></p>
+                    <p>After letting the script run for a couple of minutes, it printed out a lookup table that allowed me to decipher the original password (LVEdQPpBwr)</p>
+                    <p>CandyCane1</p>
+                </div>
+
+                <div class="writeup">
+                    <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>
+                </div>
+
+
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

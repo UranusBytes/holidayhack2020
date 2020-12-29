@@ -1,0 +1,167 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Investigate S3 Bucket: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+
+
+                <div class="title">Investigate S3 Bucket: SHHC20</div>
+                <div class="subtitle">One Bucket at a Time...</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_castle_approach_shinny_upatree')">
+                                <div class="polaroid-caption">Investigate S3 Bucket</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_castle_approach_shinny_upatree" class="polaroid-img" style="background-image: url('./screenshots/castle_approach_shinny_upatree.jpg');">&nbsp;</div></div>
+                        </div>
+                    </div>
+
+                    <p>The Investigate S3 Bucket terminal was beside my friend <span class="char" onclick="OpenCharModal('shinny_upatree')">Shinny Upatree</span>in the <a href="./castle_approach.html" class="place">Castle Approach</a>.
+                        He described loosing Santa's package in an S3, and then having the package under an unknown wrapper.  Interesting....</p>
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_investigate_s3_bucket_1')">
+                                <div class="polaroid-caption">Terminal</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_investigate_s3_bucket_1" class="polaroid-img" style="background-image: url('./evidence/investigate_s3_bucket_1.jpg');">&nbsp;</div></div>
+                        </div>
+                    </div>
+
+                    <p>
+                    Once getting to the shell, a quick survey shows a file called TIPS and a directory called bucket_finder, within which is a README,
+                        a script called bucket_finder.rb and a wordlist.
+                        Looking at the TIPS, it states multiple text editors are available, which implies we need to modify a file.  The README tells how to execute the script.</p>
+                    <p>
+                        Looking through the ruby script shows a hint if a wordlist of more than 50 words is used: use the hints in the challenge description to create the wordlist.
+                        Hmm...  Within the description, the word Wrapper3000 is in red.  Let's try adding that to the wordlist using the command <span class="command">echo Wrapper3000 >> wordlist</span></p>
+
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_investigate_s3_bucket_2')">
+                                <div class="polaroid-caption">Download Package</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_investigate_s3_bucket_2" class="polaroid-img" style="background-image: url('./evidence/investigate_s3_bucket_2.jpg');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>
+                        Running the script with <span class="command">./bucket_finder.rb --download wordlist</span>  didn't work, but then I remembered that s3 buckets only support lower case
+                    names, so I added  the value to wrapper3000.  Bingo!  A file has been downloaded.
+                    </p>
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_investigate_s3_bucket_3')">
+                                <div class="polaroid-caption">Unwrap Package</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_investigate_s3_bucket_3" class="polaroid-img" style="background-image: url('./evidence/investigate_s3_bucket_3.jpg');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>
+
+                    Looking in the directory where the script downloaded all s3 objects, there is a file called package.
+                        Inspecting with the command file as <span class="command">file package</span> shows it to be ASCII.  Looking at the
+                    file contents with <span class="command">cat package</span>, it appears to be a single string.  Hmmm...  This looks like base64.
+                    </p>
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_investigate_s3_bucket_4')">
+                                <div class="polaroid-caption">More Unwrapping</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_investigate_s3_bucket_4" class="polaroid-img" style="background-image: url('./evidence/investigate_s3_bucket_4.jpg');">&nbsp;</div></div>
+                        </div>
+                    </div>
+
+                    <p>
+                        Decoding this in base64 and directing the output to a file named package2 with <span class="command">cat package | base64 -d > package2</span>.  Using file to determine the magic number with <span class="command">file package2</span>
+                    shows this as a zip archive, so let's try unzipping it with <span class="command">unzip package2</span>.  This produces a file called package.txt.Z.xz.xxd.tar.bz2 which the file command <span class="command">file package.txt.Z.xz.xxd.tar.bz2</span> confirms it to be a bunzip2 file.
+                        Using bunzip2 on this file with <span class="command">bunzip2 package.txt.Z.xz.xxd.tar.bz2</span> produces package.txt.Z.xz.xxd.tar which .  Extracting
+                    this tar with <span class="command">tar -xvf package.txt.Z.xz.xxd.tar</span> produces a file called package.txt.Z.xz.xxd.  Hmmm, this file is ASCII, and it looks like a hex dump.
+
+                    </p>
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_investigate_s3_bucket_5')">
+                                <div class="polaroid-caption">Moooore Unwrapping</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_investigate_s3_bucket_5" class="polaroid-img" style="background-image: url('./evidence/investigate_s3_bucket_5.jpg');">&nbsp;</div></div>
+                        </div>
+                    </div>
+
+                    <p>A quick google shows xxd as a tool to make a hexdump of a file which I revert back to binary and direct to a file with <span class="command">xxd -r package.txt.Z.xz.xxd > package.txt.Z.xz</span>.
+                        The XZ compressed file is expanded with <span class="command">xz --uncompress</span> to produce package.txt.Z.
+                        Using uncompress on this with <span class="command">uncompress package.txt.Z</span>finally produces the file package.txt, which when read shows the objective flag.</p>
+                </div>
+                <div class="objective_flag">
+                    <p>North Pole: The Frostiest Place on Earth</p>
+                </div>
+
+
+                <div class="writeup">
+                    <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>
+                </div>
+
+
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
