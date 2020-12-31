@@ -99,7 +99,7 @@ def untemper(y):
 
 if __name__ == "__main__":
     # create MT19937 PRNG.
-    myprng = mt19937(3)
+    myprng = mt19937(0)
 
     # Fill with 624 values
     with open('./snowball_fight.log') as log_file:
@@ -110,4 +110,5 @@ if __name__ == "__main__":
         print(f"Seed #{i}: {temp_seed}")
 
     print(f"Next value: {myprng.extract_number()}")
+
 

