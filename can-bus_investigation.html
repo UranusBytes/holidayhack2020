@@ -1,0 +1,109 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>CAN-Bus Investigation: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+                <div class="title">CAN-Bus Investigation: SHHC20</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('can_bus_investigation')">
+                                <div class="polaroid-caption">CAN-Bus Investigation</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="can_bus_investigation" class="polaroid-img" style="background-image: url('./screenshots/can_bus_investigation.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>In the <a href="./netwars.html" class="link">NetWars</a> roof beside <span class="char" onclick="OpenCharModal('wunorse_openslae')">Wunorse Openslae</span> is a termainal titled CAN-Bus Investigation.</p>
+                    <p>Talking with Wunorse, he asks for help in finding the lock/unlock out of log files.</p>
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('can_bus_investigation_1')">
+                                <div class="polaroid-caption">Verbose Log</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="can_bus_investigation_1" class="polaroid-img" style="background-image: url('./screenshots/can_bus_investigation_1.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>Upon opening the modal, it is stated that a CAN bus log is saved in <span class="question cmd-sur">./candump.log</span> and the challenge is to find the timestamp from the UNLOCK.</p>
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('can_bus_investigation_2')">
+                                <div class="polaroid-caption">Lazy Script</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="can_bus_investigation_2" class="polaroid-img" style="background-image: url('./screenshots/can_bus_investigation_2.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>As I'm lazy, I wrote a quick python script available <a href="./parse_can_bus.py">here</a> to count the different IDs in the message logs.  This showed me that there were 3 messages with the <span class="question cmd-sur">19B</span> ID.</p>
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('can_bus_investigation_3')">
+                                <div class="polaroid-caption">Lazy Script</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="can_bus_investigation_3" class="polaroid-img" style="background-image: url('./screenshots/can_bus_investigation_3.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>I reviewed the three log: two of them had the same data (the LOCK commands) and one was unique.  So I submitted the timestamp, and it wasn't correct.  Then I re-read the instructions and submit the correct portion of the timestamp.</p>
+                    <p><span class="cmd cmd-sur">./runanswer 122520</span></p>
+
+                </div>
+
+                <div class="writeup">
+                    <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>
+                </div>
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

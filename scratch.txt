@@ -1,0 +1,1047 @@
+
+00:03
+cringlecon 3 french hens my name is dave
+00:06
+harold i'm a principal security
+00:08
+strategist
+00:08
+at splunk and we're very happy to be
+00:12
+here today at kringlecon to talk to you
+00:14
+about adversary emulation and automation
+00:18
+a bit about my background i've been in
+00:21
+security and technology
+00:23
+for quite a long time now i've had many
+00:26
+different
+00:26
+security roles everything from running
+00:29
+security programs as an information
+00:31
+security officer to being a security
+00:33
+architect security engineer
+00:35
+security analyst and i've had lots of
+00:38
+roles in it
+00:39
+as well mostly around infrastructure
+00:42
+system administration and network
+00:44
+engineering
+00:45
+i'm a former sans mentor and i've
+00:49
+really been a product of sans in my
+00:52
+career
+00:52
+i'm a gse a lot of sand certifications
+00:55
+i've spoken at a number of
+00:57
+sans summits over the past few years
+00:59
+with my colleague ryan kovar
+01:02
+currently in security i'm focusing on
+01:04
+adversary emulation which is the subject
+01:06
+of this talk
+01:08
+cloud security and i've been doing a lot
+01:10
+of full stack development
+01:12
+and getting into devsecops more in
+01:16
+in my in my day job at splunk i've been
+01:18
+at splunk for about six years
+01:20
+and i'm the co-creator of the splunk
+01:22
+boss of the sock
+01:25
+as i said we're very appreciative of the
+01:28
+opportunity to be able
+01:29
+to participate in kringlecon and in
+01:32
+holiday hack challenge
+01:35
+there's a great deal of trust that's
+01:36
+been placed in us by sans and by ed and
+01:39
+by
+01:39
+the folks at counter hack and we take
+01:42
+that very seriously
+01:44
+at every turn we will seek to emphasize
+01:47
+security and best practices and we will
+01:50
+not emphasize product positioning
+01:53
+in these challenges with that said
+01:59
+we do use splunk in these challenges and
+02:02
+it's because that's what we have access
+02:03
+to
+02:04
+but most of these concepts are universal
+02:07
+and could be applied to
+02:09
+really any technology stack that you
+02:12
+have in your sock
+02:13
+so please keep that in mind as we
+02:15
+proceed
+02:17
+why should we emulate the adversary well
+02:20
+number one it allows us to build better
+02:23
+detections
+02:24
+one of the primary activities that you
+02:26
+engage in
+02:27
+as a blue teamer protecting an
+02:29
+organization is to create detections
+02:31
+that can raise alerts when evidence of
+02:35
+adversary activity is detected
+02:38
+in order to do that and in order to
+02:40
+improve those detections over time you
+02:42
+need a source
+02:43
+of telemetry a source of data that
+02:46
+represents the adversary's activities
+02:49
+a great way to get that is through
+02:50
+emulation while it's certainly not the
+02:53
+only way to get that data
+02:54
+it does offer some benefits especially
+02:57
+consistency
+02:58
+and repeatability
+03:02
+the next reason is that emulation allows
+03:05
+you to test your detections
+03:07
+security detections are actually quite
+03:09
+fragile they're subject to
+03:11
+many externalities that can cause them
+03:14
+to stop working
+03:15
+the most successful organizations treat
+03:18
+their detections
+03:19
+like code and they test them with a ci
+03:22
+cd pipeline
+03:24
+in order to do that you need
+03:25
+repeatability you need consistency
+03:28
+and adversary emulation offers that
+03:32
+the third reason is that it allows you
+03:35
+to test your vendors
+03:36
+claims about their products every
+03:39
+security team has dozens
+03:40
+if not hundreds of different tools in
+03:43
+their sock tool chain
+03:45
+each one of those tools claims to
+03:48
+provide certain value to your
+03:50
+organization but it becomes very very
+03:53
+useful to be able to emulate adversary
+03:56
+activity in a realistic way
+03:58
+and then test whether those solutions
+04:00
+can actually
+04:02
+detect that activity we
+04:05
+have seen a dramatic increase over the
+04:07
+last year to 18 months
+04:10
+of customers demanding that
+04:13
+we emulate the adversary and then show
+04:16
+that our products can detect that
+04:18
+it's an extremely effective tactic to
+04:21
+use
+04:21
+when dealing with vendors or when
+04:23
+testing
+04:24
+one vendor solution versus another
+04:29
+if you'd like to dig a little bit deeper
+04:31
+into reasons
+04:32
+why you should include adversary
+04:34
+simulation in your security program
+04:37
+you might want to check out some of
+04:38
+these resources
+04:40
+over the past couple years some
+04:41
+colleagues of mine and i
+04:43
+have been working on an adversary
+04:46
+simulation project
+04:48
+and we've presented on that at a number
+04:49
+of conferences
+04:51
+some splunk user conferences a sans
+04:54
+blue team summit and also black hat
+04:56
+arsenal
+04:57
+both usa and asia in 2020 i do recommend
+05:01
+checking these out
+05:02
+they give a little deeper treatment to
+05:04
+why you might want to do adversary
+05:05
+simulation
+05:06
+but for today we're going to continue on
+05:09
+and show you
+05:09
+exactly how to start simulating the
+05:12
+adversary
+05:15
+so i want to show you one way that you
+05:17
+can get started with adversary emulation
+05:20
+it's really broken down into four easy
+05:22
+components or steps
+05:24
+the first one is splunk attack range
+05:27
+second is the miter attack framework
+05:29
+third is the atomic red team project
+05:32
+from red canary
+05:33
+and fourth is splunk
+05:38
+splunk attack range number one on this
+05:40
+list is a really cool project
+05:42
+it's free it's open source it's created
+05:46
+by some really smart people at splunk
+05:48
+and it makes it really easy to spin up a
+05:51
+range
+05:52
+and then to launch attacks in that range
+05:56
+and then look at the results in splunk
+06:00
+the miter attack framework of course is
+06:03
+the basis of
+06:04
+a lot of security content these days
+06:06
+it's a knowledge base
+06:08
+of adversarial activities and it's free
+06:11
+to use
+06:12
+by published by mitre it's an amazing
+06:15
+resource
+06:16
+most security content these days has
+06:19
+some sort of a mapping
+06:20
+to the mitre attack framework
+06:24
+the third item on this list atomic red
+06:26
+team is also free
+06:27
+it's an open source project it's created
+06:29
+by
+06:30
+red canary amazing company who
+06:33
+contributes so much
+06:35
+to the open source community
+06:39
+the fourth on this list is splunk splunk
+06:42
+has some forms in which it is free
+06:45
+it's freeish certainly for everything
+06:48
+we're going to show you in this
+06:50
+talk today and anything that you'll see
+06:53
+at kringlecon or in the holiday hack
+06:54
+challenge
+06:55
+you can do that with the free version of
+06:57
+splunk
+06:58
+and in fact the splunk attack range item
+07:01
+number one
+07:02
+provides splunk for free it spins up a
+07:05
+splunk
+07:06
+instance running with the free license
+07:09
+the bottom line is you can employ
+07:12
+this flavor of adversary emulation for
+07:15
+free
+07:16
+now you might accumulate a bit of cloud
+07:19
+infrastructure as a service costs to
+07:21
+spin up
+07:22
+systems but there's no software
+07:24
+licensing fees
+07:25
+involved so let's talk about the splunk
+07:29
+attack range
+07:31
+as we mentioned on the last slide splunk
+07:33
+attack range is a free open source
+07:35
+project
+07:37
+you can check it out at the url listed
+07:39
+on the bottom of this slide
+07:41
+attack range is a python script and a
+07:43
+set of configurations for terraform
+07:45
+and ansible that allow you to set up
+07:47
+ranges
+07:49
+in cloud services like aws and azure
+07:53
+you can actually use attack range to set
+07:56
+up ranges locally
+07:58
+on systems as well however we'll only
+08:00
+talk about
+08:01
+the cloud options today
+08:04
+the ranges include an active directory
+08:07
+server
+08:07
+they can include windows servers they
+08:10
+can include windows clients
+08:11
+they can include linux machines the
+08:14
+windows systems are configured with
+08:16
+sysmon
+08:17
+they're configured with a inappropriate
+08:19
+logging policy for windows security
+08:22
+events
+08:23
+you can include os query you can include
+08:25
+caldera and atomic red team
+08:27
+we'll talk a lot about atomic red team
+08:29
+today
+08:30
+you can include things like splunk
+08:32
+stream the splunk universal forwarder
+08:34
+which is the agent that
+08:36
+sends logs from systems to splunk
+08:42
+you can also include miter caldera you
+08:44
+can include
+08:45
+of course splunk and splunk phantom and
+08:48
+even
+08:49
+kali linux and this is all driven by the
+08:51
+configuration that you choose
+08:54
+one thing that is of note is if you see
+08:56
+at the bottom of this slide where it
+08:58
+says
+08:58
+index equals win index equals attack
+09:02
+index equals main these are the places
+09:05
+within splunk
+09:06
+that you are going to see the events
+09:08
+that are generated by our adversary
+09:10
+emulation
+09:12
+it's important when you get into the
+09:14
+holiday hack challenge
+09:15
+that you pay special attention to what
+09:18
+index
+09:18
+you're searching in splunk
+09:22
+i'd like to call out the authors of
+09:24
+splunk attack range
+09:26
+jose hernandez and patrick berries jose
+09:29
+and patrick are
+09:30
+colleagues of mine and good friends of
+09:32
+mine they go to great lengths
+09:34
+to publish the splunk attack range to
+09:37
+quickly address bugs and constantly add
+09:40
+new features to it
+09:42
+they also go to a great amount of effort
+09:44
+to ensure that attack range
+09:46
+remains an open source project not an
+09:48
+easy thing to do at a commercial
+09:50
+software company
+09:51
+i applaud them for their efforts and i
+09:54
+love collaborating with these two
+09:57
+gentlemen and the entire
+09:58
+splunk threat research team let's take a
+10:01
+couple minutes to talk about
+10:03
+mitre attack miter attack is widely
+10:06
+covered
+10:06
+in information security you very likely
+10:09
+have heard about mitre attack and know a
+10:11
+lot about it already so we'll just hit
+10:12
+the high points
+10:15
+miter attack is a knowledge base of
+10:16
+adversary techniques
+10:18
+as such it's very useful to search
+10:21
+through the mitre attack
+10:22
+website when you have a question about
+10:25
+things like adversary simulation
+10:28
+that's something to keep in mind when
+10:30
+you are working through holiday hack
+10:32
+challenge
+10:34
+mitre attacks organized into tactics
+10:37
+tactics often describe
+10:38
+why an adversary might perpetrate a
+10:41
+certain type of attack
+10:43
+techniques are how they will perpetrate
+10:46
+that attack
+10:47
+and techniques as of fairly recently can
+10:49
+be divided
+10:50
+often into sub techniques which allows
+10:53
+another dimension
+10:55
+to more richly describe
+10:58
+adversary techniques
+11:03
+you often see mitre attack expressed as
+11:06
+a matrix this is the miter attack
+11:08
+enterprise matrix
+11:10
+and you can see here that the columns
+11:12
+are
+11:13
+those tactics that we mentioned on the
+11:15
+last slide
+11:16
+now under those tactics are techniques
+11:19
+and in fact if you click on one of these
+11:21
+techniques you'd see
+11:23
+a great deal of detail including
+11:26
+but not limited to these sub techniques
+11:28
+you can see there's 12 sub techniques
+11:30
+here
+11:30
+now this one is id 1547 or i should say
+11:34
+id
+11:35
+t 1547 t is for technique
+11:38
+and boot or logon auto start execution
+11:42
+is
+11:42
+a big big technique it's been used
+11:46
+a great deal over the years and that
+11:48
+really is reflected in the number of sub
+11:51
+techniques now also notice that this
+11:54
+technique
+11:54
+is pertinent to linux platform windows
+11:58
+platform
+11:58
+mac os platform and probably every
+12:00
+operating system that's ever existed
+12:03
+in the history of operating systems
+12:06
+and so you need a lot of sub techniques
+12:09
+to
+12:10
+show all the different ways that you
+12:11
+could attack these various different
+12:13
+operating systems another thing that
+12:16
+you'll notice here
+12:17
+if you look at a particular technique is
+12:20
+you'll find a great deal of historical
+12:22
+research
+12:23
+that's been performed so really any time
+12:25
+that this technique has been used
+12:27
+in a breach or a compromise or a
+12:30
+prominent attack
+12:32
+and there there's been public
+12:34
+information published about that
+12:36
+you'll find that reflected here there's
+12:37
+a great deal of threat intelligence
+12:40
+that goes into the miter attack and
+12:42
+that's one of the most
+12:43
+valuable parts of mitre attack is to
+12:46
+understand
+12:47
+when these techniques have been used and
+12:50
+to what
+12:50
+adversary groups these techniques have
+12:52
+been attributed in the past
+12:56
+so let's talk about item number three on
+12:58
+our list for
+12:59
+adversary emulation and that is atomic
+13:02
+red team
+13:03
+atomic red team is an open source
+13:05
+project it is free
+13:07
+it's published on github and it was
+13:10
+created by a company called red canary
+13:12
+and red canary continues to maintain
+13:15
+atomic red team if you're not familiar
+13:17
+with red canary they are
+13:18
+one of the most prolific contributors to
+13:21
+the security community that you'll ever
+13:23
+find
+13:24
+just an amazing company a really open
+13:27
+group of people
+13:28
+who are really dedicated to sort of
+13:30
+helping the community
+13:31
+they're also a commercial company you
+13:33
+can check out their commercial offerings
+13:34
+as well
+13:36
+but just a really big fan of red canary
+13:39
+let's talk about what atomic red team
+13:41
+brings
+13:42
+to us in terms of adversary emulation
+13:45
+so this is looking at the atomic red
+13:48
+team project on github
+13:50
+its organization mirrors the
+13:52
+organization of
+13:54
+miter attack itself in this case we're
+13:56
+looking at t1547
+13:58
+that's the same technique we looked at
+14:00
+earlier when we were looking at mitre
+14:01
+attack
+14:02
+but where atomic red team comes in is it
+14:05
+picks up
+14:06
+where mitre attack stops and where miter
+14:09
+attack will describe a certain technique
+14:12
+in quite a bit of detail
+14:13
+it stops short of giving us something
+14:16
+that we can
+14:17
+actually execute so it does not give us
+14:19
+source code for
+14:21
+a malicious program it does not give us
+14:23
+a command line that an attacker might
+14:25
+run and that's
+14:26
+where atomic red team comes in atomic
+14:28
+red team provides just
+14:30
+that they call them atomics and atomics
+14:33
+are the actual code for a particular
+14:35
+operating system or a particular
+14:37
+environment that you would run
+14:38
+to implement a technique and so
+14:42
+when we're trying to do adversary
+14:43
+simulation atomic red team fills a big
+14:46
+void it gives us a very large
+14:48
+library of techniques that we can
+14:51
+emulate
+14:52
+at will because we have very specific
+14:55
+atomic tests defined
+15:00
+so let's talk about our fourth and final
+15:02
+component of our
+15:03
+adversary emulation recipe that we're
+15:06
+creating
+15:07
+now recall that we're using attack range
+15:09
+to spin up
+15:10
+some target infrastructure in the cloud
+15:14
+we're selecting some techniques from
+15:16
+mitre attack
+15:18
+and we're instructing
+15:21
+attack range to run atomic tests from
+15:24
+atomic red team
+15:25
+that are aligned with our techniques
+15:28
+from mitre attack
+15:29
+and running those against that cloud
+15:33
+infrastructure
+15:34
+now the result of that will be telemetry
+15:36
+it will be logs
+15:38
+and other types of events that will be
+15:40
+stored in splunk
+15:41
+as a result of executing these
+15:44
+emulations
+15:46
+now for convenience the way we've
+15:48
+organized this
+15:50
+is that all the results from a
+15:51
+particular technique
+15:53
+are stored in their own index so you can
+15:56
+see here
+15:57
+in the splunk search window we're
+15:59
+specifying index
+16:00
+equals t1547 star
+16:04
+star is a wild card there's actually
+16:06
+multiple indexes
+16:08
+for some of these techniques but they
+16:09
+all begin with
+16:11
+the technique id now you'll find some
+16:14
+also that have a technique id followed
+16:17
+by a dot
+16:18
+and then a sub technique id and so
+16:22
+watch out for those as well now beyond
+16:25
+specifying the indexes we're showing
+16:27
+here you can
+16:29
+run all sorts of splunk search commands
+16:32
+any other field that you want to search
+16:34
+on you can simply place after that
+16:36
+index equals t and then the technique id
+16:43
+i want to show you a couple of more
+16:44
+important things that you'll need to
+16:46
+keep in mind as you're searching through
+16:48
+splunk one is that
+16:50
+you want this time picker to be set to
+16:53
+all time don't set it to something
+16:56
+shorter than that like
+16:58
+last 24 hours or last four hours
+17:01
+because this data was collected a few
+17:04
+weeks ago
+17:06
+set it to all time it's important though
+17:08
+to remember
+17:09
+that if you go back to your production
+17:11
+splunk instance
+17:12
+at your day job don't run searches for
+17:15
+all time
+17:16
+because they're typically not going to
+17:18
+be very performant and they typically
+17:20
+will consume a lot of resources and then
+17:22
+your splunk admin
+17:23
+will be upset at you and probably at me
+17:27
+so use all time here in the holiday hack
+17:29
+challenge but don't use that
+17:31
+when you are searching in your
+17:32
+production splunk instance
+17:35
+you should also use smart mode as
+17:37
+indicated here
+17:38
+once in a while this will get set to
+17:40
+something called fast mode
+17:42
+you typically don't want that so just
+17:44
+make sure that that is in
+17:45
+smart mode
+17:50
+another piece of advice that i'll give
+17:52
+you is to watch the
+17:54
+kringle con 2 video from splunk
+17:58
+it's called dashing through the logs
+18:00
+it's from 2019
+18:02
+it was written and presented by james
+18:04
+brodsky of splunk
+18:06
+there's loads of good recommendations in
+18:08
+there about how to be more effective
+18:10
+at searching splunk and how to traverse
+18:14
+through security related source types
+18:18
+inside splunk it's a wealth of knowledge
+18:20
+there
+18:21
+we didn't want to repeat it but if you
+18:23
+feel like you need a little bit more
+18:24
+background on how to search in splunk i
+18:27
+definitely recommend that you check out
+18:28
+this talk
+18:31
+and this might be the most important
+18:33
+slide that you want to take note of
+18:36
+if you're preparing for the splunk
+18:38
+challenge
+18:39
+within holiday hack challenge 2020
+18:43
+stay frosty
+18:53
+thank you so much please do reach out on
+18:56
+twitter
+18:56
+if you have any questions or if you want
+18:59
+to
+19:00
+get any more information on adversary
+19:02
+emulation
+19:03
+i'm at dave herald and we look forward
+19:06
+to you participating in kringlecon
+19:08
+and holiday hack challenge
+19:12
+[Music]

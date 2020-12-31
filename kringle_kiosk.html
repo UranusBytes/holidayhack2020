@@ -112,10 +112,10 @@
                             <div class="polaroid-img-bg"><div id="img_kringle_kiosk_7" class="polaroid-img" style="background-image: url('./evidence/kringle_kiosk_7.jpg');">&nbsp;</div></div>
                         </div>
                     </div>
-                    <p>When I went to the print badge screen and tried to embed a command by printing <span class="command">glutious `/bin/bash` foobar</span> I was promptly (rimshot) dropped to a shell.  Zonks!
+                    <p>When I went to the print badge screen and tried to embed a command by printing <span class="cmd cmd-sur">glutious `/bin/bash` foobar</span> I was promptly (rimshot) dropped to a shell.  Zonks!
                     A quick recon (ls, pwd, whoami) didn't show stdout being returned directly (which made sense, since it is command substitution), but when it executed exit, I was greated with my badge, but with all that stdoutcontent embedded.</p>
-                    <p>However, the automagic system didn't seem to recognize the hash codes, so I closed out the window and relaunched.  This time I tried printing just with <span class="command">`/bin/bash`</span>, but still no recognition.  Hmmm...
-                        So I tried executing with <span class="command">`/bin/bash -c whoami'</span>, which responded 'shinny'.  Interesting!  <span class="command">`/bin/bash -c pwd`</span> showed '/home/shinny'.
+                    <p>However, the automagic system didn't seem to recognize the hash codes, so I closed out the window and relaunched.  This time I tried printing just with <span class="cmd cmd-sur">`/bin/bash`</span>, but still no recognition.  Hmmm...
+                        So I tried executing with <span class="cmd cmd-sur">`/bin/bash -c whoami'</span>, which responded 'shinny'.  Interesting!  <span class="cmd cmd-sur">`/bin/bash -c pwd`</span> showed '/home/shinny'.
 
                     </p>
                 </div>
@@ -128,20 +128,20 @@
                             <div class="polaroid-img-bg"><div id="img_kringle_kiosk_8" class="polaroid-img" style="background-image: url('./evidence/kringle_kiosk_8.jpg');">&nbsp;</div></div>
                         </div>
                     </div>
-                    <p>Next I tried <span class="command">`/bin/bash -c ls -las`</span>, which shows the only file in the directory is welcome.sh.  Lets see if we can see the contents of that file.  `/bin/bash -c cat ./welcome.sh`.
-                        This showed no response...  Foo...  Lets try something else...  Executing <span class="command">foo $(cat welcome.sh) bar</span> got me what I was looking for.
+                    <p>Next I tried <span class="cmd cmd-sur">`/bin/bash -c ls -las`</span>, which shows the only file in the directory is welcome.sh.  Lets see if we can see the contents of that file.  <span class="cmd cmd-sur">`/bin/bash -c cat ./welcome.sh`</span>.
+                        This showed no response...  Foo...  Lets try something else...  Executing <span class="cmd cmd-sur">foo $(cat welcome.sh) bar</span> got me what I was looking for.
 
                     </p>
                 </div>
                 <div class="subtitle">Done, but not Finished...</div>
                     <p>At this point, I was invoked a bash shell, but I could read the input until it was embedded within the badge.  I was in, but not in the way the auto-scoring system (and experts) would expect.  So how the heck can I
                         invoke a shell in a command substitution and get stdout to the terminal?  Googling didn't provide me an answer (somedays, the wordsmithing muse of G is fickle).  </p>
-                    <p>Looking at the contents of /opt/reindeer.cow show some ascii for the reindeer...</p>
-                    <p>Looking at the content of /usr/games/cowsay shows this to be a perl script called Cowsay...</p>
-                    <p>Reviewing the contents of the directory again, I see a .bashrc, so lets see whats in that.  Hmmm, mentions a /opt/success.txt.  Let's look at that.  It's part of the content that is only getting displayed on exit.</p>
+                <p>Looking at the contents of <span class="question cmd-sur">/opt/reindeer.cow</span> show some ascii for the reindeer...</p>
+                <p>Looking at the content of <span class="question cmd-sur">/usr/games/cowsay</span> shows this to be a perl script called Cowsay...</p>
+                <p>Reviewing the contents of the directory again, I see a <span class="question cmd-sur">.bashrc</span>, so lets see whats in that.  Hmmm, mentions a <span class="question cmd-sur">/opt/success.txt</span>.  Let's look at that.  It's part of the content that is only getting displayed on exit.</p>
 
                 <p>So I thought about redirecting stdout to stderr to
-                    see if I could "see" that since failed commands were being returned.  I executed the initial commands from .bashrc - <span class="command">$(/home/elf/runtoanswer WelcomeToSantasCastle 1>&2)</span>.  Boom!  The auto-score system reported I'd achieved the challenge.  But...  I still didn't see anything in the terminal...
+                    see if I could "see" that since failed commands were being returned.  I executed the initial commands from .bashrc - <span class="cmd cmd-sur">$(/home/elf/runtoanswer WelcomeToSantasCastle 1>&2)</span>.  Boom!  The auto-score system reported I'd achieved the challenge.  But...  I still didn't see anything in the terminal...
                     </p>
                     <p>This is one of those circumstances where I did it, but there's gotta be a much better way of going about doing it...  I accepted by status for the time being, and decided to move on for now.  But I do want to revisit
                     this to learn other techniques on how I could have approached this challenge.</p>
@@ -158,7 +158,7 @@
                             <div class="polaroid-img-bg"><div id="img_kringle_kiosk_extra_1" class="polaroid-img" style="background-image: url('./evidence/kringle_kiosk_extra_1.jpg');">&nbsp;</div></div>
                         </div>
                     </div>
-                    <p>Looking through the menu script, I did notice that there was a 'surprise' function that cat /opt/plant.txt, so I tried directly displaying the file using <span class="command">$(cat /opt/plant.txt)</span> and it shows
+                    <p>Looking through the menu script, I did notice that there was a 'surprise' function that cat <span class="question cmd-sur">/opt/plant.txt</span>, so I tried directly displaying the file using <span class="cmd cmd-sur">$(cat /opt/plant.txt)</span> and it shows
                         something slightly interesting, but the ascii art is getting mangled because command substition is removing all the newlines.  Looking back at the script, I see that the command is 'plant', so I ran that...
                         </p>
                 </div>

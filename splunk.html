@@ -1,0 +1,194 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Splunk: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+
+                <div class="title">Splunk: SHHC20</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('splunk')">
+                                <div class="polaroid-caption">Splunk Challenge</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="splunk" class="polaroid-img" style="background-image: url('./screenshots/splunk.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+
+                    <p>In the <a href="./great_room.html" class="place">Great Room</a> is <span class="char" onclick="OpenCharModal('angel_candysalt')">Angel Candysalt</span> standing beside a terminal with the Splunk logo.</p>
+                    <p>The terminal can only be accessed when in the Santa persona.</p>
+
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('splunk_1')">
+                                <div class="polaroid-caption">Splunk Intro</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="splunk_1" class="polaroid-img" style="background-image: url('./screenshots/splunk_1.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>Accessing the terminal shows some the overview of how to access Splunk, and info on the training questions that will help get to the challenge question answer.</p>
+                </div>
+
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('splunk_2')">
+                                <div class="polaroid-caption">Training #1</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="splunk_2" class="polaroid-img" style="background-image: url('./screenshots/splunk_2.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p class="question cmd-sur">How many distinct MITRE ATT&CK techniques did Alice emulate?</p>
+                    <p>After reviewing the chat history between Santa and Alice Bluebird, a hint is provided to find the answer for training question #1 by using the following search: <span class="cmd cmd-sur">| tstats count where index=* by index</span>, which shows 26 indexes and 13 unique MITRE ATT&CK techniques.</p>
+                </div>
+
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('splunk_3')">
+                                <div class="polaroid-caption">Training #2</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="splunk_3" class="polaroid-img" style="background-image: url('./screenshots/splunk_3.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p class="question cmd-sur">What are the names of the two indexes that contain the results of emulating Enterprise ATT&CK technique 1059.003? (Put them in alphabetical order and separate them with a space)</p>
+                    <p>Looking back at the search conducted for training question #1, I can see the two indexes.  <span class="cmd cmd-sur">t1059.003-main t1059.003-win</span>.</p>
+
+                    <p class="question cmd-sur">One technique that Santa had us simulate deals with 'system information discovery'. What is the full name of the registry key that is queried to determine the MachineGuid?</p>
+                    <p>A quick Google search showed me the answer:  <span class="question cmd-sur">HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography</span>.</p>
+                </div>
+
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('splunk_4')">
+                                <div class="polaroid-caption">Training #4</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="splunk_4" class="polaroid-img" style="background-image: url('./screenshots/splunk_4.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p class="question cmd-sur">According to events recorded by the Splunk Attack Range, when was the first OSTAP related atomic test executed? (Please provide the alphanumeric UTC timestamp.)</p>
+                    <p>I did a quick search in the attack index for the work OSTAP using the search <span class="cmd cmd-sur">index=attack OSTAP</span> which showed the answer to be <span class="question cmd-sur">2020-11-30T17:44:15Z</span>.</p>
+                </div>
+
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('splunk_5')">
+                                <div class="polaroid-caption">Training #5</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="splunk_5" class="polaroid-img" style="background-image: url('./screenshots/splunk_5.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p class="question cmd-sur">One Atomic Red Team test executed by the Attack Range makes use of an open source package authored by frgnca on GitHub. According to Sysmon (Event Code 1) events in Splunk, what was the ProcessId associated with the first use of this component?</p>
+                    <p>frgnca authored a PowerShellAudioDeviceCmdlets and the question asks about Sysmon Event Code 1, so I searched for <span class="cmd cmd-sur">index=* WindowsAudioDevice EventCode=1</span> which showed two events.  Looking at the oldest, I saw the ProcessId to be  <span class="question cmd-sur">3648</span>.</p>
+                </div>
+
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('splunk_6')">
+                                <div class="polaroid-caption">Training #6</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="splunk_6" class="polaroid-img" style="background-image: url('./screenshots/splunk_6.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p class="question cmd-sur">Alice ran a simulation of an attacker abusing Windows registry run keys. This technique leveraged a multi-line batch file that was also used by a few other techniques. What is the final command of this multi-line batch file used as part of this simulation?</p>
+                    <p>The t1547 tests are associated with Regsitry Run Keys / Startup Folder, so I started my search there.  I admittedly tried finding this through Splunk every which way, but finally found it outside.  I went back to the t1547 atomic in github and read back through the yaml to see all actions it was taking.  THere, I saw references to a bat (Discovery.bat) that I hadn't seen before.  The last command in that turned out to be the answer.</p>
+                </div>
+
+
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('splunk_7')">
+                                <div class="polaroid-caption">Training #6</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="splunk_7" class="polaroid-img" style="background-image: url('./screenshots/splunk_7.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p class="question cmd-sur">According to x509 certificate events captured by Zeek (formerly Bro), what is the serial number of the TLS certificate assigned to the Windows domain controller in the attack range?</p>
+                    <p>For this I searched for <span class="cmd cmd-sur">index=* sourcetype=bro* serial</span> which showed the certificate.subject field.  So I ran the search with a reduced query of <span class="cmd cmd-sur">index=* sourcetype=bro* certificate.subject=*dc*</span> which showed over 99% of the certs used serial <span class="question cmd-sur">55FCEEBB21270D9249E86F4B9DC7AA60</span>.</p>
+                </div>
+
+
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('splunk_7')">
+                                <div class="polaroid-caption">Training #6</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="splunk_7" class="polaroid-img" style="background-image: url('./screenshots/splunk_7.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p class="question cmd-sur">This last one is encrypted using your favorite phrase! The base64 encoded ciphertext is:<br>
+7FXjP1lyfKbyDK/MChyf36h7<br>
+It's encrypted with an old algorithm that uses a key. We don't care about RFC 7465 up here! I leave it to the elves to determine which one!
+                    </p>
+                    <p>Hmmm....  RFC 7465 is for RC4 encryption.  From watching the talk track, at the end was a slide that was stated to be the most important that stated "Stay Frosty".<p>
+                    <p>I headed over to https://cryptii.com/pipes/rc4-encryption and started by converting the string "Stay Frosty" into hex, which produced <span class="question cmd-sur">53 74 61 79 20 46 72 6f 73 74 79</span></p>
+                    <p>From there, I built a chain that took the encrypted string, base64 decoded, then decoded with RC4.</p>
+                </div>
+                <div class="objective_flag">The Lollipop Guild</div>
+
+
+
+                <div class="writeup">
+                    <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>
+                </div>
+
+
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

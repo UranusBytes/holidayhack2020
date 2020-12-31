@@ -1,0 +1,101 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Tag Generator: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+                <div class="title">Tag Generator: SHHC20</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('tag_generator')">
+                                <div class="polaroid-caption">Tag Generator</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="tag_generator" class="polaroid-img" style="background-image: url('./screenshots/tag_generator.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>In the <a href="./wrapping_room.html" class="link">Wrapping Room</a> beside <span class="char" onclick="OpenCharModal('noel_boetie')">Noel Boetie</span> is the tag generator.</p>
+                    <p>Talking with Holly, she states its not behaving appropriately.</p>
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('tag_generator_1')">
+                                <div class="polaroid-caption">Errors</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="tag_generator_1" class="polaroid-img" style="background-image: url('./screenshots/tag_generator_1.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>Noel mentioned the file upload wasn't acting correctly, so I started there by trying to upload a txt file.  This produced an error output.</p>
+                    <p>From there, I started interacting with the tag generator and watching the endpoints that were accessed through Chrome Dev tools.</p>
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('tag_generator_2')">
+                                <div class="polaroid-caption">Poke Endpoints</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="tag_generator_2" class="polaroid-img" style="background-image: url('./screenshots/tag_generator_2.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>I started with some blind curl queries to the endpoints.  Quickly I stumbled on the app dumping all the environment variables.  Yikes!</p>
+                    <p class="cmd cmd-sur">curl https://tag-generator.kringlecastle.com/image?id=foo</p>
+                </div>
+                <div class="objective_flag">
+                    <p>JackFrostWasHere</p>
+                </div>
+
+                <div class="writeup">
+                    <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>
+                </div>
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

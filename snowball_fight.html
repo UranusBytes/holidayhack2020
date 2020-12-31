@@ -34,7 +34,7 @@
                             <div class="polaroid-frame" onclick="OpenImgModal('img_snowball_fight_1')">
                                 <div class="polaroid-caption">Snowball Fight</div>
                             </div>
-                            <div class="polaroid-img-bg"><div id="img_snowball_fight_1" class="polaroid-img" style="background-image: url('./screenshots/img_snowball_fight_1.png');">&nbsp;</div></div>
+                            <div class="polaroid-img-bg"><div id="img_snowball_fight_1" class="polaroid-img" style="background-image: url('./screenshots/snowball_fight_1.png');">&nbsp;</div></div>
                         </div>
                     </div>
                     <p>Opening the modal shows the game where you can choose your player name on easy and medium, but not on hard or impossible.</p>
@@ -44,63 +44,81 @@
 
                     <div class="polaroid-rotate-right">
                         <div class="polaroid-surround">
-                            <div class="polaroid-frame" onclick="OpenImgModal('img_speaker_unprep_2')">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_snowball_fight_2')">
                                 <div class="polaroid-caption">Same Layout</div>
                             </div>
-                            <div class="polaroid-img-bg"><div id="img_speaker_unprep_2" class="polaroid-img" style="background-image: url('./screenshots/snowball_fight_2.png');">&nbsp;</div></div>
+                            <div class="polaroid-img-bg"><div id="img_snowball_fight_2" class="polaroid-img" style="background-image: url('./screenshots/snowball_fight_2.png');">&nbsp;</div></div>
                         </div>
                     </div>
-                    <p>In easy and medium mode, if the same username is used, the player's layout is the same.  So the player name is used to seed the layout.</p>
+                    <p>In easy and medium mode, if the same username is used, the player and opponent's layout is the same.  So the player name is used to seed the layouts.</p>
                 </div>
 
-                <div class="subtitle">./lights</div>
                 <div class="writeup">
-
                     <div class="polaroid-rotate">
                         <div class="polaroid-surround">
-                            <div class="polaroid-frame" onclick="OpenImgModal('img_speaker_unprep_3')">
-                                <div class="polaroid-caption">./door</div>
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_snowball_fight_3')">
+                                <div class="polaroid-caption">Not-so-Random</div>
                             </div>
-                            <div class="polaroid-img-bg"><div id="img_speaker_unprep_3" class="polaroid-img" style="background-image: url('./screenshots/speaker_unprep_3.png');">&nbsp;</div></div>
+                            <div class="polaroid-img-bg"><div id="img_snowball_fight_3" class="polaroid-img" style="background-image: url('./screenshots/snowball_fight_3.png');">&nbsp;</div></div>
                         </div>
                     </div>
-                    <p>After solving the ./door challenge, talking to <span class="char" onclick="OpenCharModal('bushy_evergreen')">Bushy Evergreen</span> gives the hint of using an encrypted username.</p>
-                    <p>Going into the labs and swapping the username and password lets the program run and outputs the decrypted password as username and it works using elf-technician as the password!</p>
-                    <p>Computer-TurnLightsOn</p>
+                    <p>Watching how the game modal was launched using Chrome Dev Tools, I saw that when the page <span class="question cmd-sur">https://snowball2.kringlecastle.com/game</span> is loaded in impossible mode, hidden in the HTML is the previous 624 random values used for the player name, which then generates the layout.</p>
                 </div>
 
-                <div class="subtitle">./vending-machine</div>
                 <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_snowball_fight_4')">
+                                <div class="polaroid-caption">Hammer Code</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_snowball_fight_4" class="polaroid-img" style="background-image: url('./screenshots/snowball_fight_4.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>Using the mt19937.py script available from <span class="question cmd-sur">https://github.com/tliston/mt19937/blob/main/mt19937.py</span>, I hammer coded it to give me the next number that is available <a href="./mt19937_hack.py">here</a>.</p>
+                    <p>So what I did was to launch a game in impossible mode, copy all 624 seeds and dumped into a log file fed into the hacked script to generate the next value in the sequence.</p>
+                </div>
 
+                <div class="writeup">
                     <div class="polaroid-rotate">
                         <div class="polaroid-surround">
-                            <div class="polaroid-frame" onclick="OpenImgModal('img_speaker_unprep_3')">
-                                <div class="polaroid-caption">./door</div>
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_snowball_fight_5')">
+                                <div class="polaroid-caption">Doppleganger</div>
                             </div>
-                            <div class="polaroid-img-bg"><div id="img_speaker_unprep_3" class="polaroid-img" style="background-image: url('./screenshots/speaker_unprep_3.png');">&nbsp;</div></div>
+                            <div class="polaroid-img-bg"><div id="img_snowball_fight_5" class="polaroid-img" style="background-image: url('./screenshots/snowball_fight_5.png');">&nbsp;</div></div>
                         </div>
                     </div>
-                    <p>In this challenge, Bushy gives the hint to remove the config file to see what happens.  If the config file is deleted, then the program will prompt for a username and password, and then create a new config file.</p>
-                    <p>Using the same password, but different usernames does not change the encrypted password, so the username is not used as salt.  Changing the password length changes the encrypted password length exactly.  So it's some type of simple subsitution.</p>
-                    <p>Setting the password to AAAAAAAA gives an encrypted string of XiGRehmw and BBBBBBBB of DqTpKv7f</p>
-                    <p>Trying just a single value of A, produces X, AA produces Xi, and AAA produces XiG, so each letter is individually replaced. </p>
-                    <p>Using a password of AAAABBBB gives a value of XIGRKv7f, so each value is individually replaced and not influenced by the value before/after.</p>
+                    <p>Opening another browser window in parallel, I opened the snowball fight game and started an easy game with the same player name as the next number.  This showed the layout to be the same!</p>
+                    <p>I played the game in easy mode to figure out the opponent's layout, then used that information to win the game in impossible mode.</p>
                 </div>
-                <div class="writeup">
 
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_snowball_fight_6')">
+                                <div class="polaroid-caption">Too Easy</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_snowball_fight_6" class="polaroid-img" style="background-image: url('./screenshots/snowball_fight_6.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>I played the game in easy mode to figure out the opponent's layout, then used that information to play the game.</p>
+                </div>
+
+
+                <div class="writeup">
                     <div class="polaroid-rotate">
                         <div class="polaroid-surround">
-                            <div class="polaroid-frame" onclick="OpenImgModal('img_speaker_unprep_4')">
-                                <div class="polaroid-caption">./door</div>
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_snowball_fight_7')">
+                                <div class="polaroid-caption">Cheating?</div>
                             </div>
-                            <div class="polaroid-img-bg"><div id="img_speaker_unprep_4" class="polaroid-img" style="background-image: url('./screenshots/speaker_unprep_4.png');">&nbsp;</div></div>
+                            <div class="polaroid-img-bg"><div id="img_snowball_fight_7" class="polaroid-img" style="background-image: url('./screenshots/snowball_fight_7.png');">&nbsp;</div></div>
                         </div>
                     </div>
-                    <p>I was lazy in trying to figure out how the cipher worked, so I wrote a quick python script that would feed passwords into ./vending-machines, pull encrypted string from config json, and then build a lookup table I could use.</p>
-                    <p>The script can be viewed <a href="./lookup.py">here</a></p>
-                    <p>After letting the script run for a couple of minutes, it printed out a lookup table that allowed me to decipher the original password (LVEdQPpBwr)</p>
-                    <p>CandyCane1</p>
+                    <p>Knowing the opponents layout in a battleship clone is a surefire way to win (unless you're my 5-year-old son, who still hasn't figured out how to use that knowledge.... *sigh).</p>
                 </div>
+
+
+
+
 
                 <div class="writeup">
                     <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>

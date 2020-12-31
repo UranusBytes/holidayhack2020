@@ -438,6 +438,17 @@ var chars = {
             "Knowing that, I can see how an elf might feed their Hard name into an Easy game to cheat a bit.",
             "But on Impossible, the best you get are rejected player names in the page comments. Can you use those somehow?",
             "Check out Tom Liston's talk for more info, if you need it.",
+            "*** After Snowball Fight ***",
+            "Crikey - that's it! You've done the Impossible! You've impressed this old elf today.",
+            "Great work identifying and abusing the pseudo-random sequence.",
+            "Now, the REAL question is, how else can this be abused? Do you think someone could try and cheat the Naughty/Nice Blockchain with this?",
+            "If you have control over to bytes in a file, it's easy to create MD5 hash collisions.",
+            "Problem is: there's that nonce that he would have to know ahead of time.",
+            "A blockchain works by \"chaining\" blocks together - so there's no way that Jack could change it without it messing up the chain...",
+            "Maybe if you look at the block that seems like it got changed, it might help.",
+            "If Jack was able to change the block AND the document without changing the hash... that would require a very UNIque hash COLLision.",
+            "Apparently Jack was able to change just 4 bytes in the block to completely change everything about it. It's like some sort of evil game to him.",
+            "That's about all the help I can give you, kid, but Prof. Petabyte may have more.",
             "*** As Santa ***",
             "Howdy Boss. You look a tad flushed.",
             "Can I get you some water from the vending machine?",
@@ -494,7 +505,6 @@ var chars = {
             "Welcome to the Wrapping Room, Santa!",
             "The tag generator is acting up.",
             "I feel like the issue has something to do with weird files being uploaded.",
-            "I feel like the issue has something to do with weird files being uploaded.",
             "Can you help me figure out what's wrong?"
 
         ]
@@ -510,7 +520,16 @@ var chars = {
             "Hey Santa! You've got to check out our Scapy Present Packet Prepper!",
             "Please work through the whole thing to make sure it's helpful for our guests!",
             "I made it so that players can help() to see how to get tasks and hints.",
-            "When you're done, maybe you can help me with this other issue I'm having."
+            "When you're done, maybe you can help me with this other issue I'm having.",
+            "*** After Scapy Prepper",
+            "Oh, I see the Scapy Present Packet Prepper has already been completed!",
+            "Now you can help me get access to this machine.",
+            "It seems that some interloper here at the North Pole has taken control of the host.",
+            "We need to regain access to some important documents associated with Kringle Castle.",
+            "Maybe we should try a machine-in-the-middle attack?",
+            "That could give us access to manipulate DNS responses.",
+            "But we'll still need to cook up something to change the HTTP response.",
+            "I'm sure glad you're here Santa."
         ]
     },
     'wunorse_openslae': {
@@ -523,10 +542,55 @@ var chars = {
             "When it was grabbing this traffic, I locked, unlocked, and locked the doors one more time.",
             "It ought to be a simple matter of just filtering out the noise until we get down to those three actions.",
             "Need more of a nudge? Check out Chris Elgee's talk on CAN traffic!",
+            "*** After CAN-Bus Investigation ***",
+            "Great work! You found the code!",
+            "I wonder if I can use this knowledge to work out some kind of universal unlocker...",
+            "... to be used only with permission, of course!",
+            "Say, do you have any thoughts on what might fix Santa's sleigh?",
+            "Turns out: Santa's sleigh uses a variation of CAN bus that we call CAN-D bus.",
+            "And there's something naughty going on in that CAN-D bus.",
+            "The brakes seem to shudder when I put some pressure on them, and the doors are acting oddly.",
+            "I'm pretty sure we need to filter out naughty CAN-D-ID codes.",
+            "There might even be some valid IDs with invalid data bytes.",
+            "For security reasons, only Santa is allowed access to the sled and its CAN-D bus.",
+            "I'll hit him up next time he's nearby.",
             "*** As Santa ***",
             "Hey Santa!",
             "Those tweaks you made to the sled just don’t seem right to me.",
             "I can’t figure out what’s wrong, but maybe you can check it out to fix it."
+        ]
+    },
+    'tinsel_upatree': {
+        'name': 'Tinsel Upatree',
+        'dialog': [
+            "Howdy Santa! Just guarding the Naughty/Nice list on your desk.",
+            "Santa, I don't know if you've heard, but something is very, very wrong...",
+            "We tabulated the latest score of the Naughty/Nice Blockchain.",
+            "Jack Frost is the nicest being in the world! Jack Frost!?!",
+            "As you know, we only really start checking the Naughty/Nice totals as we get closer to the holidays.",
+            "Out of nowhere, Jack Frost has this crazy score... positive 4,294,935,958 nice points!",
+            "No one has EVER gotten a score that high! No one knows how it happened.",
+            "Most of us recall Jack having a NEGATIVE score only a few days ago...",
+            "Worse still, his huge positive score seems to have happened way back in March.",
+            "Our first thought was that he somehow changed the blockchain - but, as you know, that isn't possible.",
+            "We ran a validation of the blockchain and it all checks out.",
+            "Even the smallest change to any block should make it invalid.",
+            "Blockchains are huge, so we cut a one minute chunk from when Jack's big score registered back in March.",
+            "You can get a slice of the Naughty/Nice blockchain on your desk.",
+            "You can get some tools to help you here.",
+            "Tangle Coalbox, in the Speaker UNPreparedness room. has been talking with attendees about the issue.",
+            "*** In Santa Office as Self ***",
+            "GOSHGOLLY",
+            "How did you get in here??",
+            "I mean, hey, I'm impressed you made it in here, but you've got to leave!",
+            "Breaking into Santa's office might mean immediate membership on the wrong side of the Naughty/Nice List."
+        ]
+    },
+    'eve_snowshoes': {
+        'name': 'Eve Snowshoes',
+        'dialog': [
+            "Hey, Santa!"
+
         ]
     },
     '': {

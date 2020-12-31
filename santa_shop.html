@@ -17,7 +17,7 @@
 
                 <div class="title">Objective-3: SHHC20</div>
                 <div class="subtitle">Santa Shop</div>
-                <div class="writeup">
+                <p class="writeup">
                     <div class="polaroid-rotate-right">
                         <div class="polaroid-surround">
                             <div class="polaroid-frame" onclick="OpenImgModal('img_santa_shop')">
@@ -45,7 +45,7 @@
                             <div class="polaroid-img-bg"><div id="img_santa_shop_3" class="polaroid-img" style="background-image: url('./evidence/santa_shop_3.png');">&nbsp;</div></div>
                         </div>
                     </div>
-                    <p>Launching the executable on a Windows VM opens a window at the password prompt just like on the terminal.  Looking at the properties of the running process shows me it to be running from C:\Users\Jeremy\AppData\Local\Programs\santa-shop</p>
+                    <p>Launching the executable on a Windows VM opens a window at the password prompt just like on the terminal.  Looking at the properties of the running process shows me it to be running from <span class="question cmd-sur">C:\Users\Jeremy\AppData\Local\Programs\santa-shop</span></p>
                     <div class="polaroid-rotate">
                         <div class="polaroid-surround">
                             <div class="polaroid-frame" onclick="OpenImgModal('img_santa_shop_4')">
@@ -54,9 +54,9 @@
                             <div class="polaroid-img-bg"><div id="img_santa_shop_4" class="polaroid-img" style="background-image: url('./evidence/santa_shop_4.png');">&nbsp;</div></div>
                         </div>
                     </div>
-                    <p>Going to the directory shows this app to be an electron app - a compiled Node.js app.  I installed node on the VM and then installed asar with the command <span class="command">npm install -g asar</span>.  I then searched for an asar (compiled code) with the command (using a bash shell) <span class="command">find ./ -name *.asar</span></p>
-                    <p>This shows the asar file to be at C:\Users\Jeremy\AppData\Local\Programs\santa-shop\resource\app.asar so I changed to that directory, made a directory for the source, and extracted the source from the asar using the command <span class="command">asar extra app.asar source</span></p>
-                    <p>As a guess, I did a recursive case-insensitive search for the string password with the command <span class="command">grep -ri password</span>.  This showed a constant defined in main.js called SANTA_PASSWORD with a value of:</p>
+                    <p>Going to the directory shows this app to be an electron app - a compiled Node.js app.  I installed node on the VM and then installed asar with the command <span class="cmd cmd-sur">npm install -g asar</span>.  I then searched for an asar (compiled code) with the command (using a bash shell) <span class="cmd cmd-sur">find ./ -name *.asar</span></p>
+                    <p>This shows the asar file to be at <span class="question cmd-sur">C:\Users\Jeremy\AppData\Local\Programs\santa-shop\resource\app.asar</span> so I changed to that directory, made a directory for the source, and extracted the source from the asar using the command <span class="cmd cmd-sur">asar extra app.asar source</span></p>
+                    <p>As a guess, I did a recursive case-insensitive search for the string password with the command <span class="cmd cmd-sur">grep -ri password</span>.  This showed a constant defined in main.js called SANTA_PASSWORD with a value of:</p>
                 </div>
                 <div class="objective_flag">
                     <p>santapass</p>
