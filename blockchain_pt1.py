@@ -8,7 +8,7 @@ from Crypto.PublicKey import RSA
 from Crypto.Signature import PKCS1_v1_5
 
 from blockchain.naughty_nice import Chain
-from blockchain.blockchain_mt19937 import mt19937
+from mt19937_hack import mt19937
 
 ###############################################################################
 # Constants
@@ -102,38 +102,54 @@ def untemper(y):
 def guess_nonces(chain):
   chain_prng = mt19937(0)
   start_block = 1
-  for i in range(0, mt19937.n, 2):
-    block_index = int((i/2) + start_block)
+  for i in range(0, mt19937.n, 1):
+    block_index = i + start_block  # int((i/2) + start_block)
     block_nonce = chain.get_block(block_index).nonce
     nonce_bytes = (block_nonce).to_bytes(8, byteorder='big')
-    print(f"{nonce_bytes}  - A: {nonce_bytes[:4]}    B:{nonce_bytes[-4:]}")
+    print(f"{nonce_bytes.hex()}  - A: {nonce_bytes[:4].hex()}    B:{nonce_bytes[-4:].hex()}")
     seed_a = int.from_bytes(nonce_bytes[:4], byteorder='big')
-    seed_b = int.from_bytes(nonce_bytes[-4:], byteorder='big')
+    # seed_b = int.from_bytes(nonce_bytes[-4:], byteorder='big')
     chain_prng.MT[i] = untemper(seed_a)
-    print(f"Block {block_index} - {block_nonce}  - {seed_a} Seeded to {i}")
-    chain_prng.MT[i+1] = untemper(seed_b)
-    print(f"Block {block_index} - {block_nonce}  - {seed_b} Seeded to {i+1}")
+    print(f"Block {block_index} - {block_nonce}  - {seed_a}({nonce_bytes[:4].hex()}) Seeded to {i}")
+    # chain_prng.MT[i+1] = untemper(seed_b)
+    #print(f"Block {block_index} - {block_nonce}  - {seed_b}({nonce_bytes[-4:].hex()}) Seeded to {i+1}")
 
-    nonce_a_bytes = (seed_a).to_bytes(4, byteorder='big')
-    nonce_b_bytes = (seed_b).to_bytes(4, byteorder='big')
-    validate_nonce_bytes = nonce_a_bytes + nonce_b_bytes
-    next_nonce = int.from_bytes(validate_nonce_bytes, byteorder='big')
-    print(f"Validate: {validate_nonce_bytes}  - {next_nonce}\n\n")
+    # nonce_a_bytes = (seed_a).to_bytes(4, byteorder='big')
+    # nonce_b_bytes = (seed_b).to_bytes(4, byteorder='big')
+    # validate_nonce_bytes = nonce_a_bytes + nonce_b_bytes
+    # next_nonce = int.from_bytes(validate_nonce_bytes, byteorder='big')
+    # print(f"Validate: {validate_nonce_bytes.hex()}  - {next_nonce}\n\n")
 
   # Start guessing
-  for i in range(mt19937.n, chain.count(), 2):
+  print('\n\n******************************************************************************\n\n')
+  for i in range(mt19937.n, mt19937.n+6, 2):
     block_index = int((i / 2) + start_block)
+    block_nonce = chain.get_block(block_index).nonce
+    nonce_bytes = (block_nonce).to_bytes(8, byteorder='big')
+    print(f"Next Block: {nonce_bytes.hex()}  - A: {nonce_bytes[:4].hex()}    ")  # B:{nonce_bytes[-4:].hex()}
+    seed_a = int.from_bytes(nonce_bytes[:4], byteorder='big')
+    # seed_b = int.from_bytes(nonce_bytes[-4:], byteorder='big')
+    print(f"Block {block_index} - {block_nonce}  - {seed_a}({nonce_bytes[:4].hex()}) Actual for {i}")
+    # print(f"Block {block_index} - {block_nonce}  - {seed_b}({nonce_bytes[-4:].hex()}) Actual to {i + 1}")
 
     guess_nonce_a = chain_prng.extract_number()
-    guess_nonce_b = chain_prng.extract_number()
+    # guess_nonce_b = chain_prng.extract_number()
+
 
     guess_nonce_a_bytes = (guess_nonce_a).to_bytes(4, byteorder='big')
-    guess_nonce_b_bytes = (guess_nonce_b).to_bytes(4, byteorder='big')
-    guess_nonce_bytes = guess_nonce_a_bytes + guess_nonce_b_bytes
-    guess_nonce = int.from_bytes(guess_nonce_bytes, byteorder='big')
-
-    block_nonce = chain.get_block(block_index).nonce
-    print("Block %i - %10.10i   Guess: %10.10i (%r)" % (block_index, block_nonce, guess_nonce, (guess_nonce == block_nonce)))
+    # guess_nonce_b_bytes = (guess_nonce_b).to_bytes(4, byteorder='big')
+    # guess_nonce_bytes = guess_nonce_a_bytes + guess_nonce_b_bytes
+    # print(f"Guess: {guess_nonce_bytes.hex()}  - A: {guess_nonce_a_bytes.hex()}    B:{guess_nonce_b_bytes.hex()}")
+    print(f"Guess: A: {guess_nonce_a_bytes.hex()}")
+    #
+    # block_nonce = chain.get_block(block_index).nonce
+    # nonce_bytes = (block_nonce).to_bytes(8, byteorder='big')
+    # print(f"Actual: {nonce_bytes.hex()}  - A: {nonce_bytes[:4].hex()}    B:{nonce_bytes[-4:].hex()}\n")
+    #
+    # guess_nonce = int.from_bytes(guess_nonce_bytes, byteorder='big')
+    #
+    # block_nonce = chain.get_block(block_index).nonce
+    # print("Block %i - %10.10i   Guess: %10.10i (%r)" % (block_index, block_nonce, guess_nonce, (guess_nonce == block_nonce)))
 
 
 # Seed of 0
