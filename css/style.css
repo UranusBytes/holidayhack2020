@@ -1,138 +1,690 @@
-.main-centered {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+
+
+
+
+
+@media print {
+    .title {
+        font-size: 16pt;
+    }
+    .content {
+        font-size: 12pt;
+        color: black;
+    }
+    .content-body {
+        font-family: 'Crayon_Pastel', Fallback, sans-serif;
+    }
+    .subtitle {
+        font-size: 13pt;
+    }
+    .content-background {
+        background-color: rgb(165, 140, 65);
+        background-repeat: repeat;
+        background-size: 100%;
+        -webkit-print-color-adjust: exact;
+        margin: 0;
+        padding: 0;
+    }
+
 }
 
-.content-surround {
-    height: 99vh;
-    min-width: 1500px;
 
+
+@media screen {
+    .title {
+        font-weight: normal;
+        font-size: 80px;
+        margin-bottom: 30px;
+        margin-top: 30px;
+    }
+
+    .content {
+        font-weight: normal;
+        font-size: 30px;
+        color: black;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+        line-height: 150%;
+    }
+
+    .main-centered {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .content-surround {
+        height: 99vh;
+        min-width: 1500px;
+
+    }
+
+
+    .content-background {
+        background-image: url("../images/background6.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding-left: -10%;
+        padding-top: 3%;
+        padding-right: 0%;
+        padding-bottom: 10%;
+        margin-right: -10%;
+    }
+
+    .content-body {
+        font-family: 'Crayon_Pastel', Fallback, sans-serif;
+        margin-left: 9%;
+        margin-top: 5%;
+        margin-right: 11%;
+        /*background-color: red;
+        opacity: 0.25;*/
+        height: 90vh;
+        padding-right: 40px;
+        overflow-y: auto;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
+
+    .question {
+        color: white;
+    }
+
+    .cmd {
+        color: rgb(36, 204, 68);
+    }
+
+    .cmd-sur {
+        font: 1.3rem Inconsolata, monospace;
+        background-color: black;
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-right: 10px;
+        border: 1px solid white;
+        overflow: auto;
+    }
+
+
+    .objective_flag {
+        font-weight: bolder;
+        font-size: 40px;
+        margin-bottom: 30px;
+        margin-top: 30px;
+        color: blue;
+        text-align: center;
+    }
+
+    .code {
+        text-align: left;
+        position: relative;
+        font-family: monospace;
+        max-width: 70%;
+        color: black;
+        background-color: #f1f1f1;
+        border: 1px black solid;
+        padding: 10px;
+        font-size: 20px;
+        overflow: auto;
+        line-height: 100%;
+    }
+
+    grey {
+        color: grey;
+    }
+
+    .subtitle {
+        font-weight: normal;
+        font-size: 50px;
+        margin-bottom: 30px;
+        clear: both;
+    }
+
+    .writeup {
+        margin-bottom: 50px;
+        clear: both;
+        z-index: 1;
+    }
+
+    .footer {
+        position: fixed;
+        bottom: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 1.0;
+        background-color: rgb(187, 164, 93);
+        /* background-color:blue; */
+        padding-top: 10px;
+        padding-bottom: 0px;
+        padding-left: 40px;
+        padding-right: 40px;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        margin-bottom: 0px;
+    }
+
+    .footer-text {
+        font-weight: normal;
+        font-size: 20px;
+        opacity: 1.0;
+    }
+
+    .indent {
+        position: relative;
+        left: 25%;
+        transform: translateX(-25%);
+        width: 50%;
+        z-index: 1;
+    }
+
+
+
+    body {
+        background-image: url("../images/background-apoc2.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        scrollbar-color: red yellow; /* For Firefox */
+    }
+
+
+    #mainContent::-webkit-scrollbar { /* Chrome, Edge, Safari */
+        width: 20px;
+        cursor: grab;
+    }
+
+    #mainContent::-webkit-scrollbar-track { /* Chrome, Edge, Safari */
+        background: rgb(140, 120, 65);
+        border-color: rgb(165, 140, 65);
+        cursor: grab;
+    }
+
+    #mainContent::-webkit-scrollbar-thumb { /* Chrome, Edge, Safari */
+        /* background-color: rgb(165, 140, 65); */
+        border-radius: 20px;
+        /* border: 3px solid rgb(165, 140, 65); */
+        background-color: rgb(165, 140, 65);
+        border: 3px solid rgb(143, 123, 64);
+        cursor: grab;
+    }
+
+    #CharDialog::-webkit-scrollbar { /* Chrome, Edge, Safari */
+        width: 20px;
+        cursor: grab;
+    }
+
+    #CharDialog::-webkit-scrollbar-track { /* Chrome, Edge, Safari */
+        background: rgb(180, 180, 180);
+        border-color: black;
+        cursor: grab;
+    }
+
+    #CharDialog::-webkit-scrollbar-thumb { /* Chrome, Edge, Safari */
+        /* background-color: rgb(165, 140, 65); */
+        border-radius: 20px;
+        /* border: 3px solid rgb(165, 140, 65); */
+        background-color: rgb(255, 255, 255);
+        border: 3px solid black;
+        cursor: grab;
+    }
+
+
+    a:link {
+        color: red;
+        text-decoration: inherit;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    a:visited {
+        color: red;
+        text-decoration: inherit;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: red;
+        text-decoration: inherit;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    a:active {
+        color: red;
+        text-decoration: inherit;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .char {
+        cursor: help;
+        color: red;
+        text-decoration: inherit;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .place .objective .event .objective {
+        cursor: pointer;
+        color: red;
+        text-decoration: inherit;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+
+    /*
+    ***********************************************************************************************************************
+    Characters
+     */
+    .char-container {
+        max-width: 1500px;
+        border: 3px solid #fff;
+        padding: 20px;
+        display: flex;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .char-child {
+        width: 50%;
+        padding: 20px 0px 0px 0px;
+    }
+
+    .char-avatar {
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+        height: 60vh;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, -10%);
+    }
+
+    .char-name {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 80vh;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+        font-size: 80px;
+        font-family: 'Crayon_Pastel', Fallback, sans-serif;
+    }
+
+    .char-dialog {
+        font-weight: normal;
+        font-size: 30px;
+        color: white;
+        font-family: 'Crayon_Pastel', Fallback, sans-serif;
+        overflow: auto;
+        height: 60vh;
+        max-height: 80%;
+    }
+
+
+    /*
+    ***********************************************************************************************************************
+    Polaroids
+     */
+    img {
+
+    }
+
+    .polaroid-rotate {
+        width: 320px;
+        height: 370px;
+        transform: rotate(-10deg);
+        float: left;
+    }
+
+    .polaroid-rotate-right {
+        width: 320px;
+        height: 370px;
+        transform: rotate(10deg) translateX(-20px);
+        float: right;
+    }
+
+    .polaroid-surround {
+        /*padding: 30px;*/
+        position: relative;
+        height: 350px;
+        left: 30px;
+    }
+
+    .polaroid-frame {
+        position: relative;
+        background-image: url("../images/polaroid.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 275px;
+        height: 341px;
+        z-index: 5;
+        cursor: zoom-in;
+    }
+
+    .polaroid-img-bg {
+        position: relative;
+        z-index: 3;
+        top: -310px;
+        left: 20px;
+        width: 230px;
+        height: 235px;
+        background-color: gray;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-image: url("../images/static.png");
+        background-size: cover;
+    }
+
+    .polaroid-img {
+        position: relative;
+        z-index: 4;
+        width: 230px;
+        height: 235px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-image: url("../screenshots/entrance.jpg");
+        background-size: contain;
+    }
+
+    .polaroid-caption {
+        position: absolute;
+        top: 83%;
+        left: 10px;
+        width: 255px;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    /*
+     Inspired by https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_img
+     */
+    .screenshot {
+        border-radius: 5px;
+        cursor: zoom-in;
+        transition: 0.3s;
+        float: left;
+        z-index: 2;
+    }
+
+    .evidence-right {
+        border-radius: 5px;
+        cursor: zoom-in;
+        transition: 0.3s;
+        float: right;
+        z-index: 2;
+    }
+
+    .evidence-left {
+        border-radius: 5px;
+        cursor: zoom-in;
+        transition: 0.3s;
+        float: left;
+        z-index: 2;
+    }
+
+    .screenshot:hover {
+        opacity: 0.7;
+    }
+
+    /*
+    ***********************************************************************************************************************
+    Modal
+     */
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 100; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.95); /* Black w/ opacity */
+    }
+
+    .modal2 {
+        position: fixed; /* Stay in place */
+        z-index: 100; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        /*overflow: auto;*/ /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.95); /* Black w/ opacity */
+        overflow: hidden;
+        display: none;
+    }
+
+
+    .polaroid-big-rotate {
+        width: 90vw;
+        height: 90vh;
+        transform: rotate(1deg);
+    }
+
+    .polaroid-big-surround {
+        /*padding: 30px;*/
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .polaroid-big {
+        position: absolute;
+        background-repeat: no-repeat;
+        background-size: contain;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 5;
+        height: 100%;
+        width: auto;
+        max-height: 90vh;
+        padding: 0px;
+        margin: 0px;
+    }
+
+
+    .modal-polaroid-surround {
+        background-color: blue;
+    }
+
+    .modal-img2 {
+        height: 100%;
+        width: auto;
+        max-height: 90vh;
+        max-width: 90vw;
+        object-fit: contain;
+
+    }
+
+    .modal-polaroid {
+        background-image: url("../images/polaroid-big2.png");
+        background-color: blue;
+        padding-top: 0px;
+        margin-top: 0px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        background-repeat: no-repeat;
+        background-position: left top;
+        background-size: contain;
+        width: 100%;
+        height: 100%;
+        max-width: 90vh;
+        z-index: 105;
+    }
+
+    .modal-polaroid-bg {
+
+        z-index: 103;
+
+    }
+
+    .modal-polaroid-img {
+        position: relative;
+        z-index: 1044;
+        width: 230px;
+        height: 235px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+    }
+
+    /*
+    .outer {
+
+      position: relative;
+      &:before {
+        display: block;
+        content: "";
+        width: 100%;
+        padding-top: (1/1) * 100%;
+      }
+      > .inner {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+    }*/
+    /*.blank-slate {
+        position:absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+    }*/
+    .resizer {
+        position: relative;
+        background-image: url("../images/polaroid-big2.png");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        left: 50%;
+        top: 50%;
+        /* width: 80vw;
+        min-width: 220px;*/
+        transform: translate(-50%, -50%);
+        width: 80vw;
+        height: 80vh;
+
+    }
+
+
+    /*.resizer_content {
+        background-color:yellow;
+        position: relative;
+        top:10%;
+    }
+
+    .resizer_content2 {
+        width: 600px;
+        height: 800px;
+        background-color:purple;
+        position: relative;
+    }*/
+    /* Modal Content (image) */
+    .modal-img {
+        margin: auto;
+        display: block;
+        width: 100%;
+        max-width: 90vh;
+    }
+
+    /* Caption of Modal Image */
+    .modal-caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 80vh;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+        font-size: 80px;
+        font-family: 'Crayon_Pastel', Fallback, sans-serif;
+
+    }
+
+    /* Add Animation */
+    .modal-img, .modal-caption {
+        -webkit-animation-name: zoom;
+        -webkit-animation-duration: 0.6s;
+        animation-name: zoom;
+        animation-duration: 0.6s;
+        animation-direction: normal;
+    }
+
+    @-webkit-keyframes zoom {
+        from {
+            -webkit-transform: scale(0)
+        }
+        to {
+            -webkit-transform: scale(1)
+        }
+    }
+
+    @keyframes zoom {
+        from {
+            transform: scale(0)
+        }
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* The Close Button */
+    .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 60px;
+        font-weight: bolder;
+        transition: 0.3s;
+    }
+
+    .modal-close:hover,
+    .modal-close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* 100% Image Width on Smaller Screens */
+    @media only screen and (max-width: 700px) {
+        .modal-img {
+            width: 100%;
+        }
+    }
+
+    .status {
+        font-weight: bolder;
+        background-color: purple;
+        padding: 5px;
+        color: white;
+    }
+
+    .status-bad {
+        font-weight: bolder;
+        background-color: yellow;
+        padding: 5px;
+        color: red;
+    }
 }
 
-.content-background {
-    background-image: url("../images/background6.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-left: -10%;
-    padding-top: 3%;
-    padding-right: 0%;
-    padding-bottom: 10%;
-    margin-right: -10%;
-}
-
-.content-body {
-    font-family: 'Crayon_Pastel', Fallback, sans-serif;
-    margin-left: 9%;
-    margin-top: 5%;
-    margin-right: 11%;
-    /*background-color: red;
-    opacity: 0.25;*/
-    height: 90vh;
-    padding-right: 40px;
-    overflow-y: auto;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
-}
-.question {
-    color: white;
-}
-.cmd {
-    color: rgb(36, 204, 68);
-}
-.cmd-sur {
-    font: 1.3rem Inconsolata, monospace;
-    background-color: black;
-    padding-left: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-right: 10px;
-    border: 1px solid white;
-    overflow: auto;
-}
-.content {
-    font-weight: normal;
-    font-size: 30px;
-    color: black;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
-    line-height: 150%;
-}
-
-.title {
-    font-weight: normal;
-    font-size: 80px;
-    margin-bottom: 30px;
-    margin-top: 30px;
-}
-
-.objective_flag {
-    font-weight: bolder;
-    font-size: 40px;
-    margin-bottom: 30px;
-    margin-top: 30px;
-    color: blue;
-    text-align: center;
-}
-.code{
-    text-align: left;
-    position: relative;
-    font-family: monospace;
-    max-width: 70%;
-    color: black;
-    background-color: #f1f1f1;
-    border: 1px black solid;
-    padding: 10px;
-    font-size: 20px;
-    overflow: auto;
-    line-height: 100%;
-}
-grey {
-    color: grey;
-}
-.subtitle {
-    font-weight: normal;
-    font-size: 50px;
-    margin-bottom: 30px;
-    clear: both;
-}
-
-.writeup {
-    margin-bottom: 50px;
-    clear: both;
-    z-index: 1;
-}
-
-.footer {
-    position: fixed;
-    bottom: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 1.0;
-    background-color:rgb(187, 164, 93);
-    /* background-color:blue; */
-    padding-top:10px;
-    padding-bottom:0px;
-    padding-left:40px;
-    padding-right:40px;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-    margin-bottom: 0px;
-}
-.footer-text {
-    font-weight: normal;
-    font-size: 20px;
-    opacity: 1.0;
-}
-
-.indent {
-    position: relative;
-    left: 25%;
-    transform: translateX(-25%);
-    width: 50%;
-    z-index: 1;
-}
 @font-face {
     font-family: 'Crayon_Hand';
     src: url('../fonts/crayon_hand.ttf') format('truetype');
@@ -141,498 +693,4 @@ grey {
 @font-face {
     font-family: 'Crayon_Pastel';
     src: url('../fonts/crayon_pastel.ttf') format('truetype');
-}
-
-body {
-    background-image: url("../images/background-apoc2.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    scrollbar-color: red yellow; /* For Firefox */
-}
-
-
-#mainContent::-webkit-scrollbar { /* Chrome, Edge, Safari */
-    width: 20px;
-    cursor: grab;
-}
-
-#mainContent::-webkit-scrollbar-track { /* Chrome, Edge, Safari */
-    background: rgb(140, 120, 65);
-    border-color: rgb(165, 140, 65);
-    cursor: grab;
-}
-
-#mainContent::-webkit-scrollbar-thumb { /* Chrome, Edge, Safari */
-    /* background-color: rgb(165, 140, 65); */
-    border-radius: 20px;
-    /* border: 3px solid rgb(165, 140, 65); */
-    background-color: rgb(165, 140, 65);
-    border: 3px solid rgb(143, 123, 64);
-    cursor: grab;
-}
-
-#CharDialog::-webkit-scrollbar { /* Chrome, Edge, Safari */
-    width: 20px;
-    cursor: grab;
-}
-
-#CharDialog::-webkit-scrollbar-track { /* Chrome, Edge, Safari */
-    background: rgb(180, 180, 180);
-    border-color: black;
-    cursor: grab;
-}
-
-#CharDialog::-webkit-scrollbar-thumb { /* Chrome, Edge, Safari */
-    /* background-color: rgb(165, 140, 65); */
-    border-radius: 20px;
-    /* border: 3px solid rgb(165, 140, 65); */
-    background-color: rgb(255, 255, 255);
-    border: 3px solid black;
-    cursor: grab;
-}
-
-
-a:link {
-    color: red;
-    text-decoration: inherit;
-    font-style: italic;
-    font-weight: bold;
-}
-
-a:visited {
-    color: red;
-    text-decoration: inherit;
-    font-style: italic;
-    font-weight: bold;
-}
-
-a:hover {
-    color: red;
-    text-decoration: inherit;
-    font-style: italic;
-    font-weight: bold;
-}
-
-a:active {
-    color: red;
-    text-decoration: inherit;
-    font-style: italic;
-    font-weight: bold;
-}
-
-.char {
-    cursor: help;
-    color: red;
-    text-decoration: inherit;
-    font-style: italic;
-    font-weight: bold;
-}
-.place .objective .event .objective {
-    cursor: pointer;
-    color: red;
-    text-decoration: inherit;
-    font-style: italic;
-    font-weight: bold;
-}
-
-
-/*
-***********************************************************************************************************************
-Characters
- */
-.char-container {
-    max-width: 1500px;
-    border: 3px solid #fff;
-    padding: 20px;
-    display: flex;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.char-child {
-    width: 50%;
-    padding: 20px 0px 0px 0px;
-}
-
-.char-avatar {
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-    height: 60vh;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, -10%);
-}
-.char-name {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 80vh;
-    text-align: center;
-    color: #ccc;
-    padding: 10px 0;
-    height: 150px;
-    font-size: 80px;
-    font-family: 'Crayon_Pastel', Fallback, sans-serif;
-}
-.char-dialog {
-    font-weight: normal;
-    font-size: 30px;
-    color: white;
-    font-family: 'Crayon_Pastel', Fallback, sans-serif;
-    overflow: auto;
-    height: 60vh;
-    max-height: 80%;
-}
-
-
-/*
-***********************************************************************************************************************
-Polaroids
- */
-img {
-
-}
-
-.polaroid-rotate {
-    width: 320px;
-    height: 370px;
-    transform:rotate(-10deg);
-    float: left;
-}
-.polaroid-rotate-right {
-    width: 320px;
-    height: 370px;
-    transform:rotate(10deg) translateX(-20px);
-    float: right;
-}
-.polaroid-surround {
-    /*padding: 30px;*/
-    position: relative;
-    height:350px;
-    left:30px;
-}
-.polaroid-frame {
-    position: relative;
-    background-image: url("../images/polaroid.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 275px;
-    height: 341px;
-    z-index: 5;
-    cursor: zoom-in;
-}
-
-.polaroid-img-bg {
-    position: relative;
-    z-index: 3;
-    top: -310px;
-    left: 20px;
-    width: 230px;
-    height: 235px;
-    background-color: gray;
-    background-repeat:no-repeat;
-    background-position:center center;
-    background-image: url("../images/static.png");
-    background-size: cover;
-}
-.polaroid-img {
-    position: relative;
-    z-index: 4;
-    width: 230px;
-    height: 235px;
-    background-repeat:no-repeat;
-    background-position:center center;
-    background-image: url("../screenshots/entrance.jpg");
-    background-size: contain;
-}
-.polaroid-caption {
-    position: absolute;
-    top: 83%;
-    left: 10px;
-    width: 255px;
-    text-align: center;
-    font-size: 20px;
-}
-
-/*
- Inspired by https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_img
- */
-.screenshot {
-    border-radius: 5px;
-    cursor: zoom-in;
-    transition: 0.3s;
-    float: left;
-    z-index: 2;
-}
-
-.evidence-right {
-    border-radius: 5px;
-    cursor: zoom-in;
-    transition: 0.3s;
-    float: right;
-    z-index: 2;
-}
-
-.evidence-left {
-    border-radius: 5px;
-    cursor: zoom-in;
-    transition: 0.3s;
-    float: left;
-    z-index: 2;
-}
-
-.screenshot:hover {
-    opacity: 0.7;
-}
-
-/*
-***********************************************************************************************************************
-Modal
- */
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 100; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.95); /* Black w/ opacity */
-}
-.modal2 {
-    position: fixed; /* Stay in place */
-    z-index: 100; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    /*overflow: auto;*/ /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.95); /* Black w/ opacity */
-    overflow: hidden;
-    display: none;
-}
-
-
-
-.polaroid-big-rotate {
-    width: 90vw;
-    height: 90vh;
-    transform:rotate(1deg);
-}
-.polaroid-big-surround {
-    /*padding: 30px;*/
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-.polaroid-big {
-    position: absolute;
-    background-repeat: no-repeat;
-    background-size: contain;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 5;
-    height: 100%;
-    width: auto;
-    max-height: 90vh;
-    padding: 0px;
-    margin: 0px;
-}
-
-
-.modal-polaroid-surround {
-    background-color: blue;
-}
-.modal-img2 {
-    height: 100%;
-    width: auto;
-    max-height: 90vh;
-    max-width: 90vw;
-    object-fit: contain;
-
-}
-.modal-polaroid {
-    background-image: url("../images/polaroid-big2.png");
-    background-color: blue;
-    padding-top: 0px;
-    margin-top: 0px;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    background-repeat:no-repeat;
-    background-position:left top;
-    background-size: contain;
-    width: 100%;
-    height: 100%;
-    max-width: 90vh;
-    z-index: 105;
-}
-.modal-polaroid-bg {
-
-    z-index: 103;
-
-}
-.modal-polaroid-img {
-    position: relative;
-    z-index: 1044;
-    width: 230px;
-    height: 235px;
-    background-repeat:no-repeat;
-    background-position:center center;
-    background-size: contain;
-}
-
-.outer {
-
-  position: relative;
-  &:before {
-    display: block;
-    content: "";
-    width: 100%;
-    padding-top: (1/1) * 100%;
-  }
-  > .inner {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-}
-/*.blank-slate {
-    position:absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-}*/
-.resizer {
-    position: relative;
-    background-image:url("../images/polaroid-big2.png");
-    background-repeat:no-repeat;
-    background-position:center center;
-    background-size: contain;
-    left: 50%;
-    top: 50%;
-    /* width: 80vw;
-    min-width: 220px;*/
-    transform: translate(-50%, -50%);
-    width: 80vw;
-    height: 80vh;
-
-}
-
-
-/*.resizer_content {
-    background-color:yellow;
-    position: relative;
-    top:10%;
-}
-
-.resizer_content2 {
-    width: 600px;
-    height: 800px;
-    background-color:purple;
-    position: relative;
-}*/
-
-
-
-
-
-/* Modal Content (image) */
-.modal-img {
-    margin: auto;
-    display: block;
-    width: 100%;
-    max-width: 90vh;
-}
-
-/* Caption of Modal Image */
-.modal-caption {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 80vh;
-    text-align: center;
-    color: #ccc;
-    padding: 10px 0;
-    height: 150px;
-    font-size: 80px;
-    font-family: 'Crayon_Pastel', Fallback, sans-serif;
-
-}
-
-/* Add Animation */
-.modal-img, .modal-caption {
-    -webkit-animation-name: zoom;
-    -webkit-animation-duration: 0.6s;
-    animation-name: zoom;
-    animation-duration: 0.6s;
-    animation-direction: normal;
-}
-
-@-webkit-keyframes zoom {
-    from {
-        -webkit-transform: scale(0)
-    }
-    to {
-        -webkit-transform: scale(1)
-    }
-}
-
-@keyframes zoom {
-    from {
-        transform: scale(0)
-    }
-    to {
-        transform: scale(1)
-    }
-}
-
-/* The Close Button */
-.modal-close {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 60px;
-    font-weight: bolder;
-    transition: 0.3s;
-}
-
-.modal-close:hover,
-.modal-close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px) {
-    .modal-img {
-        width: 100%;
-    }
-}
-
-.status {
-    font-weight: bolder;
-    background-color: purple;
-    padding: 5px;
-    color: white;
-}
-.status-bad {
-    font-weight: bolder;
-    background-color: yellow;
-    padding: 5px;
-    color: red;
 }

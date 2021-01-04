@@ -316,7 +316,10 @@ var chars = {
             "*** As Santa on NetWars roof ***",
             "Uh-oh! Santa! It’s… YOU!",
             "Hello! How are you doing?",
-            "I'm just minding my own business, watching the elves play NetWars."
+            "I'm just minding my own business, watching the elves play NetWars.",
+            "*** On Santa's Balcony ***",
+            "My plan was NEARLY perfect… but I never expected someone with your skills to come around and ruin my plan for ruining the holidays!",
+            "And now, they’re gonna put me in jail for my deeds."
         ]
     },
     'bubble_lightington': {
@@ -460,7 +463,10 @@ var chars = {
             "Oh, oh, maybe if I feed a Hard name into an Easy game I can manipulate it!",
             "UGH! on Impossible, the best I get are rejected player names in the page comments... maybe that's useful?",
             "I'll have to re-watch Tom Liston's talk again.",
-            "Thanks for all the tips and encouragement Santa!"
+            "Thanks for all the tips and encouragement Santa!",
+            "*** After Blockchain ***",
+            "I ... I'm really impressed." +
+            "Wow, you really did it!"
 
         ]
     },
@@ -583,14 +589,23 @@ var chars = {
             "GOSHGOLLY",
             "How did you get in here??",
             "I mean, hey, I'm impressed you made it in here, but you've got to leave!",
-            "Breaking into Santa's office might mean immediate membership on the wrong side of the Naughty/Nice List."
+            "Breaking into Santa's office might mean immediate membership on the wrong side of the Naughty/Nice List.",
+            "*** As Santa After Blockchain ***",
+            "The mystery is solved! I can't wait to see which attendee solved it!"
         ]
     },
     'eve_snowshoes': {
         'name': 'Eve Snowshoes',
         'dialog': [
-            "Hey, Santa!"
-
+            "Hey, Santa!",
+            "*** As Santa After Blockchain ***",
+            "I’m so glad we got the Naughty-Nice Blockchain set right again!",
+            "Gosh, it would be great to see the SANS Holiday Hack player who helped you fix it!",
+            "Can you go find the person who did that and come back here?",
+            "*** On Santa's Balcony ***",
+            "What a fantabulous job! Congratulations!",
+            "You MUST let us know how you did it!",
+            "Feel free to show off your skills with some swag - only for our victors!"
         ]
     },
     '': {

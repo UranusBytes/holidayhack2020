@@ -122,7 +122,7 @@ def print_block_len(block):
     s += (str('%016.016x' % (block.nonce)).encode('utf-8'))
     s += (str('%016.016x' % (block.pid)).encode('utf-8'))
     s += (str('%016.016x' % (block.rid)).encode('utf-8'))
-    print(f'Doc_count: {len(s)}')  # Cur len: 64
+    # print(f'Doc_count: {len(s)}')  # Cur len: 64
     s += (str('%1.1i' % (block.doc_count)).encode('utf-8'))
     s += (str(('%08.08x' % (block.score))).encode('utf-8'))
     print(f'Sign: {len(s)}')  # Cur len: 84
@@ -130,7 +130,7 @@ def print_block_len(block):
     for d in block.data:
         s += (str('%02.02x' % d['type']).encode('utf-8'))
         s += (str('%08.08x' % d['length']).encode('utf-8'))
-        print(f'PDF: {len(s)}')  # Cur len: 84
+        print(f'Data: {len(s)}')  # Cur len: 84
         s += d['data']
     s += (str('%02.02i' % (block.month)).encode('utf-8'))
     s += (str('%02.02i' % (block.day)).encode('utf-8'))
@@ -180,113 +180,47 @@ def main():
       block_md5 = hash_obj.hexdigest()
       print(f"Old hash: {block_md5}\n\n")
 
-      block.data.pop(0)  # Delete the padding file
-
-      # print_block_len(block)
+      # block.data.pop(0)  # Delete the padding file
+      print_block_len(block)
 
       temp_data = bytearray(block.block_data_signed())
-      print("Pre-Doc_Count: 0x{:02x}, {}".format(temp_data[64], temp_data[64]))
       print("Pre-Naughty: 0x{:02x}, {}".format(temp_data[73], temp_data[73]))
-      print("Pre-PDF: 0x{:02x}, {}".format(temp_data[147], temp_data[147]))
-      print("Pre-PDF: 0x{:02x}, {}".format(temp_data[156], temp_data[156]))
+      print("Balance-1: 0x{:02x}, {}".format(temp_data[137], temp_data[137]))
+      print("Pre-PDF: 0x{:02x}, {}".format(temp_data[265], temp_data[265]))
+      print("Balance-2: 0x{:02x}, {}".format(temp_data[329], temp_data[329]))  # Change doc object
 
 
       print("\nChange values\n***************************\n")
-      block.doc_count = 1
       block.sign = Naughty
-
+      # Balance Naught
       temp_data = bytearray(block.data[0]['data'])
-      temp_data[63] = temp_data[63] - 1
-      temp_data[72] = temp_data[72] - 1
+      temp_data[53] = temp_data[53] + 1
       block.data[0]['data'] = bytes(temp_data)
+
+      # Change PDF
+      temp_data = bytearray(block.data[1]['data'])
+      temp_data[63] = temp_data[63] + 1
+      temp_data[127] = temp_data[127] - 1
+      block.data[1]['data'] = bytes(temp_data)
 
       #
       temp_data = bytearray(block.block_data_signed())
-      print("Post-Doc_Count: 0x{:02x}, {}".format(temp_data[64], temp_data[64]))
+      # print("Post-Doc_Count: 0x{:02x}, {}".format(temp_data[64], temp_data[64]))
       print("Post-Naughty: 0x{:02x}, {}".format(temp_data[73], temp_data[73]))
-      print("Post-PDF: 0x{:02x}, {}".format(temp_data[147], temp_data[147]))
-      print("Post-PDF: 0x{:02x}, {}".format(temp_data[156], temp_data[156]))
+      print("Balance-1: 0x{:02x}, {}".format(temp_data[137], temp_data[137]))
+      print("Post-PDF: 0x{:02x}, {}".format(temp_data[265], temp_data[265]))
+      print("Post-PDF: 0x{:02x}, {}".format(temp_data[329], temp_data[329]))  # Change doc object
 
       hash_obj = MD5.new()
       hash_obj.update(block.block_data_signed())
       block_md5 = hash_obj.hexdigest()
       print(f"\n\nNew hash: {block_md5}")
 
-      exit(1)
-
-      print("Post-Naughty: 0x{:02x}, {}".format(temp_data[146], temp_data[146]))
-
-      #
-      # print(f"Change Doc Count from {block.doc_count} to 1")  # 64
-      # block.doc_count = 1
+      hash_obj = SHA256.new()
+      hash_obj.update(block.block_data_signed())
+      print(f"\n\nNew SHA256 hash: {hash_obj.hexdigest()}")
 
 
-      # Bit for PDF = 147
-
-      # print("Delete padding doc")
-      # block.data.pop(0)
-
-      print_block_len(block)
-      temp_data = bytearray(block.block_data_signed())
-      print("PDF: 0x{:02x}, {}".format(temp_data[146], temp_data[146]))
-      print("PDF: 0x{:02x}, {}".format(temp_data[147], temp_data[147]))
-      print("PDF: 0x{:02x}, {}".format(temp_data[148], temp_data[148]))
-      print('\n\n')
-
-      block_index = 63
-      temp_data = bytearray(block.data[0]['data'])
-      temp_data[block_index] = temp_data[block_index] + 1
-      block.data[0]['data'] = bytes(temp_data)
-
-      temp_data = bytearray(block.block_data_signed())
-      print("PDF: 0x{:02x}, {}".format(temp_data[146], temp_data[146]))
-      print("PDF: 0x{:02x}, {}".format(temp_data[147], temp_data[147]))
-      print("PDF: 0x{:02x}, {}".format(temp_data[148], temp_data[148]))
-      print('\n\n')
-
-      block_index = 63
-      temp_data = bytearray(block.data[0]['data'])
-      temp_data[block_index] = temp_data[block_index] - 1
-      block.data[0]['data'] = bytes(temp_data)
-
-      temp_data = bytearray(block.block_data_signed())
-      print("PDF: 0x{:02x}, {}".format(temp_data[146], temp_data[146]))
-      print("PDF: 0x{:02x}, {}".format(temp_data[147], temp_data[147]))
-      print("PDF: 0x{:02x}, {}".format(temp_data[148], temp_data[148]))
-      print('\n\n')
-
-
-      hash_obj = MD5.new()
-      hash_obj.update(bytes(temp_data))
-      block_md5 = hash_obj.hexdigest()
-      print(f"Old hash: {block_md5}")
-
-      block.data.pop(0)  # Delete the padding file
-
-
-      hash_obj = MD5.new()
-      hash_obj.update(temp_bytes)
-      block_md5 = hash_obj.hexdigest()
-      print(f"New hash: {block_md5}")
-      print('Here')
-
-
-
-    # if block.sign == Nice and block.score > 500:
-    #   print(f'i: {i}  index: {block.index}   score: {block.score}')
-    #   for ii in range(len(block.data)):
-    #     block.dump_doc(ii)
-    #     print(f'Dumped doc')
-
-    # if block.pid == 77777:
-    #   print(f'i: {i}  Jack Block')
-    #
-    # if block.rid == 527:
-    #   print(f'i: {i}  Reporter Block')
-
-  # print("\n\n**********************************************************************\n")
-  # print("Guess Logic #2\n\n")
-  # guess_nonces2(nnl)
 
   return  # End of main
 
