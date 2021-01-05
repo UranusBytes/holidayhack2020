@@ -183,7 +183,7 @@
         background-image: url("/images/background-apoc2.jpg");
         background-repeat: no-repeat;
         background-size: cover;
-        scrollbar-color: red yellow; /* For Firefox */
+        scrollbar-color: rgb(165, 140, 65) rgb(143, 123, 64); /* For Firefox */
     }
 
 
