@@ -62,7 +62,7 @@
 
 
     .content-background {
-        background-image: url("../images/background6.png");
+        background-image: url("/images/background6.png");
         background-repeat: no-repeat;
         background-size: cover;
         padding-left: -10%;
@@ -180,7 +180,7 @@
 
 
     body {
-        background-image: url("../images/background-apoc2.jpg");
+        background-image: url("/images/background-apoc2.jpg");
         background-repeat: no-repeat;
         background-size: cover;
         scrollbar-color: red yellow; /* For Firefox */
@@ -357,7 +357,7 @@
 
     .polaroid-frame {
         position: relative;
-        background-image: url("../images/polaroid.png");
+        background-image: url("/images/polaroid.png");
         background-repeat: no-repeat;
         background-size: cover;
         width: 275px;
@@ -376,7 +376,7 @@
         background-color: gray;
         background-repeat: no-repeat;
         background-position: center center;
-        background-image: url("../images/static.png");
+        background-image: url("/images/static.png");
         background-size: cover;
     }
 
@@ -387,7 +387,7 @@
         height: 235px;
         background-repeat: no-repeat;
         background-position: center center;
-        background-image: url("../screenshots/entrance.jpg");
+        background-image: url("/screenshots/entrance.jpg");
         background-size: contain;
     }
 
@@ -509,7 +509,7 @@
     }
 
     .modal-polaroid {
-        background-image: url("../images/polaroid-big2.png");
+        background-image: url("/images/polaroid-big2.png");
         background-color: blue;
         padding-top: 0px;
         margin-top: 0px;
@@ -568,7 +568,7 @@
     }*/
     .resizer {
         position: relative;
-        background-image: url("../images/polaroid-big2.png");
+        background-image: url("/images/polaroid-big2.png");
         background-repeat: no-repeat;
         background-position: center center;
         background-size: contain;
@@ -687,10 +687,10 @@
 
 @font-face {
     font-family: 'Crayon_Hand';
-    src: url('../fonts/crayon_hand.ttf') format('truetype');
+    src: url('/fonts/crayon_hand.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Crayon_Pastel';
-    src: url('../fonts/crayon_pastel.ttf') format('truetype');
+    src: url('/fonts/crayon_pastel.ttf') format('truetype');
 }
