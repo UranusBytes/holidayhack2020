@@ -1,0 +1,92 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Naught/Nice List with Blockchain Investigation - Part 1: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+                <div class="title">Naught/Nice List with Blockchain Investigation - Part 1: SHHC20</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_nnl_pt1')">
+                                <div class="polaroid-caption">Blockchain Pt1</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_nnl_pt1" class="polaroid-img" style="background-image: url('./screenshots/nnl.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>In the <a href="./santa_office.html" class="link">Santa's Office</a> beside <span class="char" onclick="OpenCharModal('tinsel_upatree')">Tinsel Upatree</span> on the table is the Naught/Nice List.</p>
+                    <p>Even though the chunk of the blockchain that you have ends with block 129996, can you predict the nonce for block 130000? Talk to Tangle Coalbox in the Speaker UNpreparedness Room for tips on prediction and Tinsel Upatree for more tips and tools. (Enter just the 16-character hex value of the nonce)</p>
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('nnl_pt1_1')">
+                                <div class="polaroid-caption">Python Script</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="nnl_pt1_1" class="polaroid-img" style="background-image: url('./screenshots/nnl_pt1_1.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>To find the nonce for block 130000, I wrote a python script that is available <a href="./blockchain_pt1.py">Here</a></p>
+                    <p>First, I extended the Chain class so that I could more easily pull individual blocks out, dump the nonces, etc....</p>
+                    <p>With the nonces dumped, I copied the mt19937 code that was used for <a href="snowball_fight.html">Snowball Fight</a>, but in my braindead stuppor, I couldn't figure out the exact code changes that were needed to use a 64bit nonce instead of a 32bit.  I'm missing something, and some additional futzing on my part will figure it out.  But some googling showed another variation at <a href="https://github.com/kmyk/mersenne-twister-predictor">here</a> that allowed me to feed the nonce in and guess the next one.  </p>
+
+                </div>
+                <div class="objective_flag">0x57066318f32f729d
+                    </div>
+
+                <div class="writeup">
+                    <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>
+                </div>
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

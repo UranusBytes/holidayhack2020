@@ -1,0 +1,118 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Naught/Nice List with Blockchain Investigation - Part 2: SANS Holiday Hack 2020</title>
+    <script type="text/javascript" src="./scripts/chars.js"></script>
+</head>
+<body>
+<div class="content-surround main-centered">
+    <div class="content-background">
+        <div id="mainContent" class="content-body">
+            <div class="content">
+                <!--
+                Common - v2020.DEC.23
+                -->
+
+
+
+                <div class="title">Naught/Nice List with Blockchain Investigation - Part 2: SHHC20</div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('img_nnl_pt1')">
+                                <div class="polaroid-caption">Blockchain Pt2</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="img_nnl_pt1" class="polaroid-img" style="background-image: url('./screenshots/nnl.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>In the <a href="./santa_office.html" class="link">Santa's Office</a> beside <span class="char" onclick="OpenCharModal('tinsel_upatree')">Tinsel Upatree</span> on the table is the Naught/Nice List.</p>
+                    <p>The SHA256 of Jack's altered block is: 58a3b9335a6ceb0234c12d35a0564c4e f0e90152d0eb2ce2082383b38028a90f. If you're clever, you can recreate the original version of that block by changing the values of only 4 bytes. Once you've recreated the original block, what is the SHA256 of that block?</p>
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('nnl_pt1_2')">
+                                <div class="polaroid-caption">Hidden Page</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="nnl_pt1_2" class="polaroid-img" style="background-image: url('./screenshots/nnl_pt2_2.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>Digging through the doc, I see that two pages are defined, but the second page (obj 3) is never referenced in the page tree, so its content (object 15) is never displayed.</p>
+                    <p>So I changed the page reference in the initial catalog (obj 1) in byte 62 from 2 (0x32) to 3 (0x33).</p>
+
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate-right">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('nnl_pt1_1')">
+                                <div class="polaroid-caption">The True Report</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="nnl_pt1_1" class="polaroid-img" style="background-image: url('./screenshots/nnl_pt2_1.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>Displaying this PDF shows very different content!  Wow, Jack is a douche!</p>
+                    <p>So I need to change that byte from a 2 to a 3.  Looking through the other block content, points being added or removed were with a single value (sign).</p>
+
+                </div>
+                <div class="writeup">
+                    <div class="polaroid-rotate">
+                        <div class="polaroid-surround">
+                            <div class="polaroid-frame" onclick="OpenImgModal('nnl_pt1_3')">
+                                <div class="polaroid-caption">Hammer Code</div>
+                            </div>
+                            <div class="polaroid-img-bg"><div id="nnl_pt1_3" class="polaroid-img" style="background-image: url('./screenshots/nnl_pt2_3.png');">&nbsp;</div></div>
+                        </div>
+                    </div>
+                    <p>At this point, I know two bytes that I need change, leaving two more.  After reading through some of the documentation on UniColl, I decided the easiest would be to just hammer it.</p>
+                    <p>So I wrote a python script available <a href="blockchain_pt2.py">here</a> that just brute forces through the first bunch of blocks to figure out the two that need to be changed to balance things out.</p>
+
+                </div>
+
+                <div class="objective_flag">fff054f33c2134e0230efb29dad515064ac97aa8c68d33c58c01213a0d408afb
+                    </div>
+
+                <div class="writeup">
+                    <p>An overview of all people, places, and events can be learned in the <a href="./index.html" class="link">Introduction</a>.</p>
+                </div>
+
+
+
+                <!--
+                Common - v2020.DEC.23
+                -->
+            </div>
+            <div class="footer" style="">
+                <span class="footer-text">
+                    <a href="./index.html">Find Other Scrolls</a> | <a href="mailto:jeremy@uranusbytes.com">jeremy@uranusbytes.com</a> | <a href="./credits.html">Credits</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImgModalDiv" class="modal2">
+    <span id="ImgModalClose" class="modal-close" onclick="CloseImgModal();">&times;</span>
+    <div class="polaroid-big-rotate">
+        <div class="polaroid-big-surround">
+            <img id="ModalImg" src="./images/blank.png" class="polaroid-big" />
+        </div>
+    </div>
+</div>
+
+
+<div id="CharModalDiv" class="modal">
+    <span id="CharModalClose" class="modal-close" onclick="CloseCharModal();">&times;</span>
+    <div class="char-container">
+        <div class="char-child" style="flex-grow: 1; overflow: hidden;">
+            <div id="CharName" class="char-name">Jingle</div>
+            <img id="CharAvatar" class="char-avatar" src="./images/blank.png">
+        </div>
+        <div class="char-child" style="flex-grow: 1;">
+            <div class="char-name">Dialog</div>
+            <div id="CharDialog" class="char-dialog"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
