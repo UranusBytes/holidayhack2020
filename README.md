@@ -1,6 +1,7 @@
-These are my notes and files for the SANS Holiday Hack 2020 Challenge.
+# SANS Holiday Hack 2020 Challenge
+These are my notes and files for the SANS Holiday Hack 2020 Challenge (https://holidayhackchallenge.com/2020/) that can be viewed at: 
 
-https://holidayhackchallenge.com/2020/
+## https://hhc2020.uranusbytes.com/
 
 I had built it around a website, and yet ran out of time to fully polish it as much as I would like.
 
